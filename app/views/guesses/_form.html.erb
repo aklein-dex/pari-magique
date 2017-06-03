@@ -1,0 +1,32 @@
+<%= form_with(model: guess, local: true) do |form| %>
+  <% if guess.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(guess.errors.count, "error") %> prohibited this guess from being saved:</h2>
+
+      <ul>
+      <% guess.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :member_id %>
+    <%= form.text_field :member_id, id: :guess_member_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :game_id %>
+    <%= form.text_field :game_id, id: :guess_game_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :result %>
+    <%= form.text_field :result, id: :guess_result %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

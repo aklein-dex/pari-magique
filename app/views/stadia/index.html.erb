@@ -1,0 +1,28 @@
+<% provide(:title, "Stadiums") %>
+<h1>Stadiums</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stadia.each do |stadium| %>
+      <tr>
+        <td><%= stadium.name %></td>
+        <td><%= stadium.city %></td>
+        <td><%= link_to 'Show', stadium %></td>
+        <td><%= link_to 'Edit', edit_stadium_path(stadium) %></td>
+        <td><%= link_to 'Destroy', stadium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stadium', new_stadium_path %>

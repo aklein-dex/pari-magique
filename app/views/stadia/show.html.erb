@@ -1,0 +1,13 @@
+<% provide(:title, @stadium.name) %>
+<p>
+  <strong>Name:</strong>
+  <%= @stadium.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @stadium.city %>
+</p>
+
+<%= link_to 'Edit', edit_stadium_path(@stadium) %> |
+<%= link_to 'Back', stadia_path %>

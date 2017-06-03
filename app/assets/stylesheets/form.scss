@@ -1,0 +1,24 @@
+form#new_user {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+form#new_user .form-signin-heading,
+form#new_user .checkbox {
+  margin-bottom: 10px;
+}
+form#new_user .checkbox {
+  font-weight: normal;
+}
+form#new_user .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+form#new_user .form-control:focus {
+  z-index: 2;
+}
+
