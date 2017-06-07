@@ -26,6 +26,14 @@
     <%= form.number_field :year, id: :tournament_year %>
   </div>
 
+  <div class="field">
+    <div class="field_head">Teams</div>
+    <%= hidden_field_tag("tournament[team_ids][]", nil) %>
+    <% Team.order(:name).each do |team| %>
+        <label><%= check_box_tag("tournament[team_ids][]", team.id, team.id.in?(tournament.teams.collect(&:id))) %> <%= team.name %></label>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

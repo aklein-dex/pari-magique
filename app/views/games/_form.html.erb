@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :tournament_id %>
-    <%= form.text_field :tournament_id, id: :game_tournament_id %>
+    <%= form.collection_select(:tournament_id, Tournament.all, :id, :name) %>
   </div>
 
   <div class="field">
     <%= form.label :home_id %>
-    <%= form.number_field :home_id, id: :game_home_id %>
+    <%= form.collection_select(:home_id, Team.all, :id, :name) %>
   </div>
 
   <div class="field">
     <%= form.label :away_id %>
-    <%= form.number_field :away_id, id: :game_away_id %>
+    <%= form.collection_select(:away_id, Team.all, :id, :name) %>
   </div>
 
   <div class="field">
@@ -37,18 +37,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.number_field :type, id: :game_type %>
+    <%= form.label :stage %>
+    <%= form.select :stage, Game.stages.keys, id: :game_stage %>
   </div>
 
   <div class="field">
     <%= form.label :pool %>
-    <%= form.number_field :pool, id: :game_pool %>
+    <%= form.select :pool, Game.pools.keys, id: :game_pool %>
   </div>
 
   <div class="field">
     <%= form.label :stadium_id %>
-    <%= form.text_field :stadium_id, id: :game_stadium_id %>
+    <%= form.collection_select(:stadium_id, Stadium.all, :id, :name) %>
   </div>
 
   <div class="actions">

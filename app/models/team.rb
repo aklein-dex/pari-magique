@@ -10,4 +10,8 @@ class Team < ApplicationRecord
   validates :flag,
             length: { maximum: 20 },
             presence: true
+  validates :selection,
+            presence: true
+
+  enum selection: [:country, :club]
 end

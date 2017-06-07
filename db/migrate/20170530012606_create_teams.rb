@@ -4,6 +4,7 @@ class CreateTeams < ActiveRecord::Migration[5.1]
       t.string :name, null: false, limit: 20
       t.string :code, null: false, limit: 3
       t.string :flag, null: false, limit: 20
+      t.integer :selection, null: false, default: 0
 
       t.timestamps
     end

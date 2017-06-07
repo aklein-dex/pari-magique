@@ -26,6 +26,11 @@
     <%= form.text_field :flag, id: :team_flag %>
   </div>
 
+  <div class="field">
+    <%= form.label :selection %>
+    <%= form.select :selection, Team.selections.keys, id: :team_selection %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

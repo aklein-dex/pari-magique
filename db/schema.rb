@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170603070126) do
     t.integer "away_id", null: false
     t.string "result", limit: 5, default: "", null: false
     t.datetime "schedule", null: false
-    t.integer "type"
+    t.integer "stage", default: 0
     t.integer "pool"
     t.integer "stadium_id", null: false
     t.datetime "created_at", null: false
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 20170603070126) do
     t.index ["name"], name: "index_leagues_on_name"
   end
 
+  create_table "leagues_tournaments", id: false, force: :cascade do |t|
+    t.integer "tournament_id", null: false
+    t.integer "league_id", null: false
+    t.index ["league_id"], name: "index_leagues_tournaments_on_league_id"
+    t.index ["tournament_id"], name: "index_leagues_tournaments_on_tournament_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.integer "league_id", null: false
     t.integer "user_id", null: false
@@ -67,27 +74,21 @@ ActiveRecord::Schema.define(version: 20170603070126) do
     t.index ["name"], name: "index_stadia_on_name"
   end
 
-  create_table "table_tournaments_leagues", id: false, force: :cascade do |t|
-    t.integer "tournament_id", null: false
-    t.integer "league_id", null: false
-    t.index ["league_id"], name: "index_table_tournaments_leagues_on_league_id"
-    t.index ["tournament_id"], name: "index_table_tournaments_leagues_on_tournament_id"
-  end
-
-  create_table "table_tournaments_teams", id: false, force: :cascade do |t|
-    t.integer "tournament_id", null: false
-    t.integer "team_id", null: false
-    t.index ["team_id"], name: "index_table_tournaments_teams_on_team_id"
-    t.index ["tournament_id"], name: "index_table_tournaments_teams_on_tournament_id"
-  end
-
   create_table "teams", force: :cascade do |t|
     t.string "name", limit: 20, null: false
     t.string "code", limit: 3, null: false
     t.string "flag", limit: 20, null: false
+    t.integer "selection", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_teams_on_name", unique: true
+  end
+
+  create_table "teams_tournaments", id: false, force: :cascade do |t|
+    t.integer "tournament_id", null: false
+    t.integer "team_id", null: false
+    t.index ["team_id"], name: "index_teams_tournaments_on_team_id"
+    t.index ["tournament_id"], name: "index_teams_tournaments_on_tournament_id"
   end
 
   create_table "tournaments", force: :cascade do |t|

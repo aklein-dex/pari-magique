@@ -2,7 +2,7 @@
 
 <h1>Games</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Tournament</th>
@@ -10,10 +10,10 @@
       <th>Away</th>
       <th>Result</th>
       <th>Schedule</th>
-      <th>Type</th>
+      <th>Stage</th>
       <th>Pool</th>
       <th>Stadium</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -25,12 +25,20 @@
         <td><%= game.away_id %></td>
         <td><%= game.result %></td>
         <td><%= game.schedule %></td>
-        <td><%= game.type %></td>
+        <td><%= game.stage %></td>
         <td><%= game.pool %></td>
         <td><%= game.stadium %></td>
-        <td><%= link_to 'Show', game %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to game, class: "action_button" do %>
+              <i class="fa fa-info-circle"></i>
+          <% end %>
+          <%= link_to edit_game_path(game), class: "action_button" do %>
+              <i class="fa fa-pencil-square-o"></i>
+          <% end %>
+          <%= link_to game, class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-times"></i>
+              <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

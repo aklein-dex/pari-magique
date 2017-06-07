@@ -7,6 +7,7 @@ class Stadium < ApplicationRecord
             length: { maximum: 20 },
             presence: true
   validates :capacity,
+            numericality: { only_integer: true },
             length: { maximum: 5 },
             presence: true
 end

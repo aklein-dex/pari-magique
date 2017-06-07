@@ -2,13 +2,13 @@
 
 <h1>Tournaments</h1>
 
-<table>
+<table class="table table-striped tournament-table-witdh">
   <thead>
     <tr>
       <th>Name</th>
       <th>Location</th>
       <th>Year</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -18,9 +18,17 @@
         <td><%= tournament.name %></td>
         <td><%= tournament.location %></td>
         <td><%= tournament.year %></td>
-        <td><%= link_to 'Show', tournament %></td>
-        <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
-        <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to tournament, class: "action_button" do %>
+              <i class="fa fa-info-circle"></i>
+          <% end %>
+          <%= link_to edit_tournament_path(tournament), class: "action_button" do %>
+              <i class="fa fa-pencil-square-o"></i>
+          <% end %>
+          <%= link_to tournament, class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-times"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

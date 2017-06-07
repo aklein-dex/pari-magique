@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  resources :members
-  resources :leagues
-  resources :guesses
-  resources :games
+
   devise_for :users
   root 'static_pages#home'
   
@@ -13,4 +10,8 @@ Rails.application.routes.draw do
   resources :teams
   resources :stadia
   resources :tournaments
+  resources :members
+  resources :leagues
+  resources :guesses
+  resources :games
 end

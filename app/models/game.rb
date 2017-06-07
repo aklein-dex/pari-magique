@@ -11,8 +11,9 @@ class Game < ApplicationRecord
             length: { maximum: 5 },
             format: { with: /[\d]?[\d]-[\d]?[\d]/i }
   validates :schedule, presence: true
-  validates :type, presence: true
+  validates :stage, presence: true
   validates :stadium_id, presence: true
 
-  enum type: [:pool, :huitieme, :quarter, :semi, :finale]
+  enum stage: [:pool, :huitieme, :quarter, :semi, :finale]
+  enum pool: [:A, :B, :C, :D, :E, :F, :G, :H]
 end

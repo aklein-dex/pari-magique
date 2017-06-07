@@ -19,23 +19,39 @@ user.save!
 Team.create!(
     :name => "France",
     :code => "FRA",
-    :flag => "fra.gif"
+    :flag => "fra.gif",
+    :selection => 0
 )
 
 Team.create!(
     :name => "Pologne",
     :code => "POL",
-    :flag => "pol.gif"
+    :flag => "pol.gif",
+    :selection => 0
 )
 
 Team.create!(
     :name => "Grèce",
     :code => "GRC",
-    :flag => "grc.gif"
+    :flag => "grc.gif",
+    :selection => 0
 )
 
 Team.create!(
     :name => "Russie",
     :code => "RUS",
-    :flag => "rus.gif"
+    :flag => "rus.gif",
+    :selection => 0
+)
+
+Stadium.create!(
+    :name => "Stade de France",
+    :city => "Paris",
+    :capacity => 80000
+)
+
+Tournament.create!(
+    :name => "World Cup 2018",
+    :location => "Russie",
+    :year => 2018
 )
