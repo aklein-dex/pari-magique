@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "League") %>
 
 <p>
   <strong>Name:</strong>
@@ -7,3 +7,13 @@
 
 <%= link_to 'Edit', edit_league_path(@league) %> |
 <%= link_to 'Back', leagues_path %>
+
+
+List of members:
+
+<% @league.members.each do |member| %>
+  <%= member.user.name %>
+<% end %>
+
+
+

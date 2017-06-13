@@ -11,47 +11,63 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :tournament_id %>
-    <%= form.collection_select(:tournament_id, Tournament.all, :id, :name) %>
+  <div class="form-group row">
+    <%= form.label :tournament_id, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, class: 'form-control') %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :home_id %>
-    <%= form.collection_select(:home_id, Team.all, :id, :name) %>
+  <div class="form-group row">
+    <%= form.label :home_id, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.collection_select(:home_id, Team.all, :id, :name) %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :away_id %>
-    <%= form.collection_select(:away_id, Team.all, :id, :name) %>
+  <div class="form-group row">
+    <%= form.label :away_id, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.collection_select(:away_id, Team.all, :id, :name) %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :result %>
-    <%= form.text_field :result, id: :game_result %>
+  <div class="form-group row">
+    <%= form.label :result, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.text_field :result, id: :game_result %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :schedule %>
-    <%= form.datetime_select :schedule, id: :game_schedule %>
+  <div class="form-group row">
+    <%= form.label :schedule, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.datetime_select :schedule, id: :game_schedule %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :stage %>
-    <%= form.select :stage, Game.stages.keys, id: :game_stage %>
+  <div class="form-group row">
+    <%= form.label :stage, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.select :stage, Game.stages.keys, id: :game_stage %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :pool %>
-    <%= form.select :pool, Game.pools.keys, id: :game_pool %>
+  <div class="form-group row">
+    <%= form.label :pool, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.select :pool, Game.pools.keys, id: :game_pool %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :stadium_id %>
-    <%= form.collection_select(:stadium_id, Stadium.all, :id, :name) %>
+  <div class="form-group row">
+    <%= form.label :stadium_id, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.collection_select(:stadium_id, Stadium.all, :id, :name) %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
