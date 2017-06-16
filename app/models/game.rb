@@ -10,7 +10,7 @@ class Game < ApplicationRecord
   validates :result,
             length: { maximum: 5 },
             format: { with: /[\d]?[\d]-[\d]?[\d]/i }
-  validates :schedule, presence: true
+  validates :kickoff_at, presence: true
   validates :stage, presence: true
   validates :stadium_id, presence: true
 
