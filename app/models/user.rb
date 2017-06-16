@@ -15,4 +15,8 @@ class User < ApplicationRecord
   has_many :members
   has_many :leagues, :through => :members
 
+  # For role inheritance. For example an admin can do everything that a manager can do.
+  def role?(compare_to_role)
+    read_attribute_before_type_cast(:role) >= User.roles[compare_to_role]
+  end
 end

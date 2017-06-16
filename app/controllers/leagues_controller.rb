@@ -1,5 +1,6 @@
 class LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /leagues
   # GET /leagues.json
@@ -26,8 +27,12 @@ class LeaguesController < ApplicationController
   def create
     @league = League.new(league_params)
 
+
     respond_to do |format|
       if @league.save
+        member = Member.new(:user_id => current_user.id, :league_id =>  @league.id, :occupation => :coach)
+        member.save
+
         format.html { redirect_to @league, notice: 'League was successfully created.' }
         format.json { render :show, status: :created, location: @league }
       else
