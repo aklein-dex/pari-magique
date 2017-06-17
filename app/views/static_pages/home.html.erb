@@ -1,10 +1,27 @@
 <% provide(:title, "Home") %>
 <h1>Pari-magique</h1>
 
-<p>Are you ready to bet on soccer games?</p>
+<p>Welcome <%= current_user.username %></p>
 
-<p>Create an account and place your bets!</p>
-<%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
+Your league(s):
+<br>
 
-<p>Already have an account? Then sign in!</p>
-<%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
+<% current_user.leagues.each do |league| %>
+    <%= link_to league.name, league %>
+<% end %>
+
+<br><br>
+<%= link_to 'Create a league', new_league_path %>
+<br><br>
+Join an existing league:
+<br>
+<ul>
+<% @all_leagues.each do |league| %>
+    <li>
+      <%= form_for @request  do |form| %>
+        <%= form.hidden_field :league_id, id: :league_id, value: league.id %>
+        <%= link_to league.name, league %> <%= form.submit "Send request", class: "btn btn-primary" %>
+      <% end %>
+    </li>
+<% end %>
+</ul>

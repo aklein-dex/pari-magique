@@ -15,8 +15,22 @@ class User < ApplicationRecord
   has_many :members
   has_many :leagues, :through => :members
 
+  # Check if the current_user is a coach for the param league
+  def is_coach?(league_id)
+    member = members.where(:league_id => league_id).first
+    return member.occupation?(:coach) if member
+    false
+  end
+
+  # Check if the current_user is a player for the param league
+  def is_player?(league_id)
+    member = members.where(:league_id => league_id).first
+    return member.occupation?(:player) if member
+    false
+  end
+
   # For role inheritance. For example an admin can do everything that a manager can do.
   def role?(compare_to_role)
-    read_attribute_before_type_cast(:role) >= User.roles[compare_to_role]
+    User.roles[role] >= User.roles[compare_to_role]
   end
 end

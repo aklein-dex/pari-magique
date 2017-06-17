@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170613114613) do
     t.integer "home_id", null: false
     t.integer "away_id", null: false
     t.string "result", limit: 5, default: "", null: false
-    t.datetime "schedule", null: false
+    t.datetime "kickoff_at", null: false
     t.integer "stage", default: 0
     t.integer "pool"
     t.integer "stadium_id", null: false
@@ -66,14 +66,14 @@ ActiveRecord::Schema.define(version: 20170613114613) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "user_id_id", null: false
-    t.integer "league_id_id", null: false
+    t.integer "user_id", null: false
+    t.integer "league_id", null: false
     t.datetime "accepted_at"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["league_id_id"], name: "index_requests_on_league_id_id"
-    t.index ["user_id_id"], name: "index_requests_on_user_id_id"
+    t.index ["league_id"], name: "index_requests_on_league_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "stadia", force: :cascade do |t|

@@ -8,4 +8,9 @@ class Member < ApplicationRecord
 
 
   enum occupation: [:player, :coach]
+
+  # For role inheritance. For example an coach can do everything that a player can do.
+  def occupation?(compare_to_occupation)
+    Member.occupations[occupation] >= Member.occupations[compare_to_occupation]
+  end
 end

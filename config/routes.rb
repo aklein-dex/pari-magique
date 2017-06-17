@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'static_pages#home'
+  root 'static_pages#home_root'
   
   get 'static_pages/home'
   get '/rules', to: 'static_pages#rules'
@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :leagues
   resources :guesses
   resources :games
+  resources :requests
 end

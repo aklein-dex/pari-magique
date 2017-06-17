@@ -6,7 +6,20 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.role? :member
-      can [:create, :update], League
+      can [:create], Request
+      can [:update], Request do |request|
+        user.is_coach?(request.league.id)
+      end
+
+      can [:create], League
+      can [:read], League do |league|
+        user.is_player?(league.id)
+      end
+
+      can [:update, :destroy], League do |league|
+        user.is_coach?(league.id)
+      end
+
     end
 
     if user.role? :manager

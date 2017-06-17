@@ -3,8 +3,11 @@ class League < ApplicationRecord
 
   has_many :members
   has_many :users, :through => :members
+  has_many :requests
 
   validates :name,
             length: { maximum: 20 },
             presence: true
+
+
 end

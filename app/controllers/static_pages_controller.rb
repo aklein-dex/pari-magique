@@ -11,6 +11,7 @@ class StaticPagesController < ApplicationController
   # Home page when a user logs in.
   def home
     @all_leagues = League.all.order(:name)
+    @request = Request.new
   end
 
   def rules

@@ -16,6 +16,24 @@ user = User.new(
 )
 user.save!
 
+user = User.new(
+    :username              => "user1",
+    :role                  => :member,
+    :email                 => "user1@pari-magique.com",
+    :password              => "123456",
+    :password_confirmation => "123456"
+)
+user.save!
+
+user = User.new(
+    :username              => "user2",
+    :role                  => :member,
+    :email                 => "user2@pari-magique.com",
+    :password              => "123456",
+    :password_confirmation => "123456"
+)
+user.save!
+
 Team.create!(
     :name => "France",
     :code => "FRA",

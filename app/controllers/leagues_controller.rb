@@ -27,7 +27,7 @@ class LeaguesController < ApplicationController
   def create
     @league = League.new(league_params)
 
-
+    # TODO use transaction!
     respond_to do |format|
       if @league.save
         member = Member.new(:user_id => current_user.id, :league_id =>  @league.id, :occupation => :coach)

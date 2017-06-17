@@ -10,15 +10,55 @@ In 2017, I decided to switch to Rails because it is my favorite Web framework an
 
 The goal is to use github with [Heroku](https://www.heroku.com/) for easy deployment.
 
-*As of June 2017, this project is still in early stage. The database is created and only some of the views.*
-
-
-Ruby version 2.3.4 (latest version supported by Heroku)
-
-Database creation *rake db:migrate*
-
-Database initialization *rake db:seed*
+Ruby version **2.3.4** (latest version supported by Heroku)
 
 How to run the test suite
 
 Deployment instructions 
+
+### Database
+
+For a better understanding of the relations between the models, please have a look to the diagram ```db/DatabaseSchema.png```.
+
+To create the database run: ```rake db:migrate```
+
+To insert data run: ```rake db:seed```
+
+
+### Roles and authorization
+
+#### Site wide
+
+##### admin
+
+* manage all
+* promote members to manager or admin
+
+##### manager
+
+* manage games (set result)
+
+##### member
+
+* see leagues
+* create a league (and becomes coach)
+* send a request to join a league (and becomes player)
+
+##### unregistered user
+
+* create an account (and becomes member)
+
+#### League wide
+
+##### coach
+
+* add tournaments to a league
+* accept requets from players to join the league
+* promote players to coach
+
+##### player
+
+* see tournaments
+* see games
+* create guesses
+* see rankings
