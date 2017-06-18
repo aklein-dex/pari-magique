@@ -10,7 +10,7 @@
 
 <ul>
 <% @league.users.each do |user| %>
-  <li><%= user.username %></li>
+  <li><%= user.username %> (<%= user.league_occupation(@league.id) %>)</li>
 <% end %>
 </ul>
 
@@ -31,4 +31,24 @@
       <% end %>
     </li>
 <% end %>
+</ul>
+
+<h3>Tournaments</h3>
+<ul>
+  <% @league.tournaments.each do |tournament| %>
+    <li><%= tournament.name %></li>
+  <% end %>
+</ul>
+Add tournament:<br>
+<ul>
+  <% Tournament.all.each do |tournament| %>
+      <li>
+        <%= tournament.name %>
+        <%= form_for @league do |form| %>
+            <%= form.hidden_field :league_id, id: :league_id, value: @league_id %>
+            <%= form.hidden_field :tournament_ids, id: :tournament_id, value: tournament.id %>
+            <%= form.submit "Add", class: "btn btn-primary" %>
+        <% end %>
+      </li>
+  <% end %>
 </ul>

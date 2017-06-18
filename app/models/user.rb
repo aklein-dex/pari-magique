@@ -15,6 +15,13 @@ class User < ApplicationRecord
   has_many :members
   has_many :leagues, :through => :members
 
+  # Return the occupation of the user for the league
+  def league_occupation(league_id)
+    return "coach"  if is_coach?(league_id)
+    return "player" if is_player?(league_id)
+    return "n/a"
+  end
+
   # Check if the current_user is a coach for the param league
   def is_coach?(league_id)
     member = members.where(:league_id => league_id).first
