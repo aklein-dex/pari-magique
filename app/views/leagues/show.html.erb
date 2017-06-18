@@ -2,7 +2,7 @@
 
 <h1><%= @league.name %></h1>
 
-<% if can? :update, @leage %>
+<% if can? :update, @league %>
   <%= link_to 'Edit', edit_league_path(@league) %>
 <% end %>
 
@@ -14,41 +14,52 @@
 <% end %>
 </ul>
 
-<h3>Requests</h3>
+<% if can? :update, @league %>
 
-<ul>
-<% @league.requests.pending.each do |request| %>
-    <li>
-      <%= request.user.username %>
-      <%= form_for request  do |form| %>
-        <%= form.hidden_field :status, id: :request_status, value: "accepted" %>
-        <%= form.submit "Accept", class: "btn btn-primary" %>
-      <% end %>
+  <h3>Requests</h3>
 
-      <%= form_for request  do |form| %>
-          <%= form.hidden_field :status, id: :request_status, value: "rejected" %>
-          <%= form.submit "Reject", class: "btn btn-primary" %>
-      <% end %>
-    </li>
+  <ul>
+  <% @league.requests.pending.each do |request| %>
+      <li>
+        <%= request.user.username %>
+        <%= form_for request  do |form| %>
+          <%= form.hidden_field :status, id: :request_status, value: "accepted" %>
+          <%= form.submit "Accept", class: "btn btn-primary" %>
+        <% end %>
+
+        <%= form_for request  do |form| %>
+            <%= form.hidden_field :status, id: :request_status, value: "rejected" %>
+            <%= form.submit "Reject", class: "btn btn-primary" %>
+        <% end %>
+      </li>
+  <% end %>
+  </ul>
 <% end %>
-</ul>
 
 <h3>Tournaments</h3>
 <ul>
   <% @league.tournaments.each do |tournament| %>
-    <li><%= tournament.name %></li>
+    <li>
+      <%= link_to tournament, class: "action_button" do %>
+          <i class="fa fa-info-circle"></i><%= tournament.name %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
-Add tournament:<br>
-<ul>
-  <% Tournament.all.each do |tournament| %>
-      <li>
-        <%= tournament.name %>
-        <%= form_for @league do |form| %>
-            <%= form.hidden_field :league_id, id: :league_id, value: @league_id %>
-            <%= form.hidden_field :tournament_ids, id: :tournament_id, value: tournament.id %>
-            <%= form.submit "Add", class: "btn btn-primary" %>
-        <% end %>
-      </li>
-  <% end %>
-</ul>
+
+<% if can? :update, @league %>
+
+  Add tournament:<br>
+  <ul>
+    <% Tournament.all.each do |tournament| %>
+        <li>
+          <%= tournament.name %>
+          <%= form_for @league do |form| %>
+              <%= form.hidden_field :league_id, id: :league_id, value: @league_id %>
+              <%= form.hidden_field :tournament_ids, id: :tournament_id, value: tournament.id %>
+              <%= form.submit "Add", class: "btn btn-primary" %>
+          <% end %>
+        </li>
+    <% end %>
+  </ul>
+<% end %>
