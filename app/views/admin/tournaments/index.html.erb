@@ -19,13 +19,13 @@
         <td><%= tournament.location %></td>
         <td><%= tournament.year %></td>
         <td>
-          <%= link_to tournament, class: "action_button" do %>
+          <%= link_to [:admin, tournament], class: "action_button" do %>
               <i class="fa fa-info-circle"></i>
           <% end %>
-          <%= link_to edit_tournament_path(tournament), class: "action_button" do %>
+          <%= link_to edit_admin_tournament_path(tournament), class: "action_button" do %>
               <i class="fa fa-pencil-square-o"></i>
           <% end %>
-          <%= link_to tournament, class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= link_to [:admin, tournament], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class="fa fa-times"></i>
           <% end %>
         </td>
@@ -36,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Tournament', new_tournament_path %>
+<%= link_to 'New Tournament', new_admin_tournament_path %>
