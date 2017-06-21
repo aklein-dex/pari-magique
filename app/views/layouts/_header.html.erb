@@ -16,11 +16,11 @@
               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Admin <b class="caret"></b></a>
               <div class="dropdown-menu">
                 <%= link_to "Leagues",     leagues_path,     class: "dropdown-item" %>
-                <%= link_to "Tournaments", admin_tournaments_path, class: "dropdown-item" %>
                 <%= link_to "Games",       games_path,       class: "dropdown-item" %>
                 <%= link_to "Users",       users_path,       class: "dropdown-item" %>
-                <%= link_to "Teams",       teams_path,       class: "dropdown-item" %>
-                <%= link_to "Stadiums",    stadia_path,      class: "dropdown-item" %>
+                <%= link_to "Teams",       admin_teams_path,       class: "dropdown-item" %>
+                <%= link_to "Tournaments", admin_tournaments_path, class: "dropdown-item" %>
+                <%= link_to "Stadiums",    admin_stadia_path,      class: "dropdown-item" %>
               </div>
             </li>
           <% end %>

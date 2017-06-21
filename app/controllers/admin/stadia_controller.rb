@@ -1,4 +1,4 @@
-class StadiaController < ApplicationController
+class Admin::StadiaController < ApplicationController
   before_action :set_stadium, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
@@ -29,7 +29,7 @@ class StadiaController < ApplicationController
 
     respond_to do |format|
       if @stadium.save
-        format.html { redirect_to @stadium, notice: 'Stadium was successfully created.' }
+        format.html { redirect_to [:admin, @stadium], notice: 'Stadium was successfully created.' }
         format.json { render :show, status: :created, location: @stadium }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class StadiaController < ApplicationController
   def update
     respond_to do |format|
       if @stadium.update(stadium_params)
-        format.html { redirect_to @stadium, notice: 'Stadium was successfully updated.' }
+        format.html { redirect_to [:admin, @stadium], notice: 'Stadium was successfully updated.' }
         format.json { render :show, status: :ok, location: @stadium }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class StadiaController < ApplicationController
   def destroy
     @stadium.destroy
     respond_to do |format|
-      format.html { redirect_to stadia_url, notice: 'Stadium was successfully destroyed.' }
+      format.html { redirect_to admin_stadia_url, notice: 'Stadium was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

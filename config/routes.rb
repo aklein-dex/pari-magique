@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   get '/rules', to: 'static_pages#rules'
 
   resources :users
-  resources :teams
-  resources :stadia
   resources :members
   resources :leagues
   resources :guesses
@@ -16,6 +14,6 @@ Rails.application.routes.draw do
   resources :requests
 
   namespace :admin do
-    resources :tournaments
+    resources :tournaments, :stadia, :teams
   end
 end

@@ -18,13 +18,13 @@
         <td><%= stadium.city %></td>
         <td><%= stadium.capacity %></td>
         <td>
-          <%= link_to  stadium, class: "action_button" do %>
+          <%= link_to  [:admin, stadium], class: "action_button" do %>
             <i class="fa fa-info-circle"></i>
           <% end %>
-          <%= link_to edit_stadium_path(stadium), class: "action_button" do %>
+          <%= link_to edit_admin_stadium_path(stadium), class: "action_button" do %>
               <i class="fa fa-pencil-square-o"></i>
           <% end %>
-          <%= link_to stadium, class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= link_to [:admin, stadium], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class="fa fa-times"></i>
           <% end %>
       </tr>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Stadium', new_stadium_path %>
+<%= link_to 'New Stadium', new_admin_stadium_path %>

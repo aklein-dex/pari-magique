@@ -20,13 +20,13 @@
         <td><%= team.flag %></td>
         <td><%= team.selection %></td>
         <td>
-          <%= link_to team, class: "action_button" do %>
+          <%= link_to [:admin, team], class: "action_button" do %>
               <i class="fa fa-info-circle"></i>
           <% end %>
-          <%= link_to edit_team_path(team), class: "action_button" do %>
+          <%= link_to edit_admin_team_path(team), class: "action_button" do %>
               <i class="fa fa-pencil-square-o"></i>
           <% end %>
-          <%= link_to team, class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= link_to [:admin, team], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class="fa fa-times"></i>
           <% end %>
         </td>
@@ -37,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Team', new_team_path %>
+<%= link_to 'New Team', new_admin_team_path %>
