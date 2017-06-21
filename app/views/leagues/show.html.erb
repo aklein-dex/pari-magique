@@ -40,7 +40,7 @@
 <ul>
   <% @league.tournaments.each do |tournament| %>
     <li>
-      <%= link_to tournament, class: "action_button" do %>
+      <%= link_to [@league, tournament], class: "action_button" do %>
           <i class="fa fa-info-circle"></i><%= tournament.name %>
       <% end %>
     </li>

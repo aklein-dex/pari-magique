@@ -15,11 +15,12 @@ class Ability
       can [:read], League do |league|
         user.is_player?(league.id)
       end
-
+      
       can [:update, :destroy], League do |league|
         user.is_coach?(league.id)
       end
 
+      can [:read], Tournament
     end
 
     if user.role? :manager
