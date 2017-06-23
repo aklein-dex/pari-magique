@@ -6,6 +6,16 @@
 <h3>Ranking</h3>
 <br>
 <h3>Next 5 coming games</h3>
+<ul>
+<% @coming_games.each do |game| %>
+    <li><%= game.home.name %> vs <%= game.away.name %></li>
+<% end %>
+</ul>
 <br>
 <h3>Last 5 games</h3>
+<ul>
+  <% @last_games.each do |game| %>
+      <li><%= game.home.name %> vs <%= game.away.name %></li>
+  <% end %>
+</ul>
 

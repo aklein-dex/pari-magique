@@ -4,6 +4,8 @@ class TournamentsController < ApplicationController
 
 
   def show
+    @coming_games = @tournament.games.next_5_games
+    @last_games   = @tournament.games.last_5_games
   end
 
   private

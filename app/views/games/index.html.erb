@@ -20,14 +20,14 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= game.tournament %></td>
-        <td><%= game.home_id %></td>
-        <td><%= game.away_id %></td>
+        <td><%= game.tournament.name %></td>
+        <td><%= game.home.name %></td>
+        <td><%= game.away.name %></td>
         <td><%= game.result %></td>
         <td><%= game.kickoff_at %></td>
         <td><%= game.stage %></td>
         <td><%= game.pool %></td>
-        <td><%= game.stadium %></td>
+        <td><%= game.stadium.name %></td>
         <td>
           <%= link_to game, class: "action_button" do %>
               <i class="fa fa-info-circle"></i>
