@@ -6,7 +6,9 @@ class TournamentsController < ApplicationController
   def show
     @coming_games = @tournament.games.next_5_games
     @last_games   = @tournament.games.last_5_games
+    @guess        = Guess.new(:league => @league)
   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

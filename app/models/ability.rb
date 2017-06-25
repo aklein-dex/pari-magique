@@ -21,6 +21,11 @@ class Ability
       end
 
       can [:read], Tournament
+
+      can [:create], Guess
+      can [:read, :update], Guess do |guess|
+        user.id == guess.member.user_id
+      end
     end
 
     if user.role? :manager

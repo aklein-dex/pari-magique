@@ -26,6 +26,8 @@ class GuessesController < ApplicationController
   # POST /guesses.json
   def create
     @guess = Guess.new(guess_params)
+    member = Member.select(:id).where(:league_id => @guess.league_id).where(:user_id => current_user.id).first
+    @guess.member_id = member.id
 
     respond_to do |format|
       if @guess.save
@@ -70,6 +72,6 @@ class GuessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def guess_params
-      params.require(:guess).permit(:user_id, :game_id, :result)
+      params.require(:guess).permit(:member_id, :game_id, :league_id, :result)
     end
 end

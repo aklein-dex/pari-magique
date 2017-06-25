@@ -8,14 +8,24 @@
 <h3>Next 5 coming games</h3>
 <ul>
 <% @coming_games.each do |game| %>
-    <li><%= game.home.name %> vs <%= game.away.name %></li>
+    <li>
+      <%= game.home.name %> vs <%= game.away.name %>
+      <%= form_for @guess do |form| %>
+          <%= form.hidden_field :game_id, id: :game_id, value: game.id %>
+          <%= form.hidden_field :league_id, id: :game_league_id, value: @league.id %>
+          <%= form.text_field :result, id: :game_result %>
+          <div class="actions">
+            <%= form.submit "Submit", class: "btn btn-primary" %>
+          </div>
+      <% end %>
+    </li>
 <% end %>
 </ul>
 <br>
 <h3>Last 5 games</h3>
 <ul>
   <% @last_games.each do |game| %>
-      <li><%= game.home.name %> vs <%= game.away.name %></li>
+      <li><%= game.home.name %> vs <%= game.away.name %> <%= game.result %></li>
   <% end %>
 </ul>
 
