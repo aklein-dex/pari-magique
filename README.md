@@ -8,6 +8,16 @@ I had this idea in 2008. With a small group of friends we decided to predict the
 In 2012, more friends joined and it would have been to much work to do everything manually so I created a more dynamic PHP Web site (using [Yii framework](www.yiiframework.com/)) where people could log in and enter their guesses. 
 In 2017, I decided to switch to Rails because it is my favorite Web framework and I could add more features.
 
+#### Development process 
+
+* design database 
+* add authentication
+* create relationships between models (ActiveRecord) 
+* create sample forms (views) for all the models 
+* add basic authorization 
+* implements quickly some basic features (to have a better idea of the final project) 
+* review all features one by one and improve them and create tests
+
 The goal is to use github with [Heroku](https://www.heroku.com/) for easy deployment.
 
 Ruby version **2.3.4** (latest version supported by Heroku)
