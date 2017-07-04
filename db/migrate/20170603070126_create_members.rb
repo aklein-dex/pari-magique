@@ -4,7 +4,8 @@ class CreateMembers < ActiveRecord::Migration[5.1]
       t.references :league, foreign_key: true, null: false, index: true
       t.references :user, foreign_key: true, null: false, index: true
       t.integer :occupation, null: false, default: 0
-
+      t.string :username, :null => false
+      
       t.timestamps
     end
   end

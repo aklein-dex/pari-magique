@@ -26,6 +26,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
+    @member.username = current_user.username
 
     respond_to do |format|
       if @member.save

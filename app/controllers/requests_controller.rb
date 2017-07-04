@@ -23,7 +23,7 @@ class RequestsController < ApplicationController
       if @request.update(request_params)
         if Request.statuses[@request.status] == Request.statuses[:accepted]
           # let's create a member
-          member = Member.new(:user_id => @request.user_id, :league_id =>  @request.league_id, :occupation => :player)
+          member = Member.new(:user_id => @request.user_id, :league_id =>  @request.league_id, :occupation => :player, :username => current_user.username)
           member.save
         end
         format.html { redirect_to @request.league, notice: 'Request was successfully updated.' }
