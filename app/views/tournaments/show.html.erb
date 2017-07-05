@@ -10,10 +10,17 @@
 <% @coming_games.each do |game| %>
     <li>
       <%= game.home.name %> vs <%= game.away.name %>
-      <%= form_for @guess do |form| %>
-          <%= form.hidden_field :game_id, id: :game_id, value: game.id %>
+      <% if game.guesses[0] != nil
+          temp = game.guesses[0]
+         else
+           temp = @guess
+         end
+      %>
+      <%= form_for temp do |form| %>
+          <%= form.hidden_field :id,        id: :id,             value: temp.id %>
+          <%= form.hidden_field :game_id,   id: :game_id,        value: game.id %>
           <%= form.hidden_field :league_id, id: :game_league_id, value: @league.id %>
-          <%= form.text_field :result, id: :game_result %>
+          <%= form.text_field   :result,    id: :guess_result,   value: temp.result %>
           <div class="actions">
             <%= form.submit "Submit", class: "btn btn-primary" %>
           </div>

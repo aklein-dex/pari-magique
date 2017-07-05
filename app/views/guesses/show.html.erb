@@ -2,12 +2,12 @@
 
 <p>
   <strong>member:</strong>
-  <%= @guess.member %>
+  <%= @guess.member.username %>
 </p>
 
 <p>
   <strong>Game:</strong>
-  <%= @guess.game %>
+  <%= @guess.game.home.name %> vs <%= @guess.game.away.name %>
 </p>
 
 <p>

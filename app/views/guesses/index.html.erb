@@ -16,7 +16,7 @@
     <% @guesses.each do |guess| %>
       <tr>
         <td><%= guess.member %></td>
-        <td><%= guess.game %></td>
+        <td><%= guess.game.home.name%> <%= guess.game.away.name%></td>
         <td><%= guess.result %></td>
         <td><%= link_to 'Show', guess %></td>
         <td><%= link_to 'Edit', edit_guess_path(guess) %></td>

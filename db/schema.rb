@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170613114613) do
     t.integer "league_id", null: false
     t.integer "user_id", null: false
     t.integer "occupation", default: 0, null: false
+    t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["league_id"], name: "index_members_on_league_id"

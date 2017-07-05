@@ -30,7 +30,7 @@ class LeaguesController < ApplicationController
     # TODO use transaction!
     respond_to do |format|
       if @league.save
-        member = Member.new(:user_id => current_user.id, :league_id =>  @league.id, :occupation => :coach)
+        member = Member.new(:user_id => current_user.id, :league_id =>  @league.id, :occupation => :coach, :username => current_user.username)
         member.save
 
         format.html { redirect_to @league, notice: 'League was successfully created.' }
