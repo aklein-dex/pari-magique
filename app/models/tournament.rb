@@ -2,6 +2,7 @@ class Tournament < ApplicationRecord
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :leagues
   has_many :games
+  has_many :rankings
 
   validates :name,
             length: { maximum: 20 },

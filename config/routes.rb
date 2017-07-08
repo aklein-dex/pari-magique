@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :rankings
   devise_for :users
   root 'static_pages#home_root'
   

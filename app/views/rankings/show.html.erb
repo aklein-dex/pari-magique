@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>League:</strong>
+  <%= @ranking.league_id %>
+</p>
+
+<p>
+  <strong>Tournament:</strong>
+  <%= @ranking.tournament_id %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @ranking.member_id %>
+</p>
+
+<p>
+  <strong>3 points:</strong>
+  <%= @ranking.points3 %>
+</p>
+
+<p>
+  <strong>1 point:</strong>
+  <%= @ranking.point1 %>
+</p>
+
+<p>
+  <strong>0 point:</strong>
+  <%= @ranking.point0 %>
+</p>
+
+<%= link_to 'Edit', edit_ranking_path(@ranking) %> |
+<%= link_to 'Back', rankings_path %>

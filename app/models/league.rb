@@ -4,6 +4,7 @@ class League < ApplicationRecord
   has_many :members
   has_many :users, :through => :members
   has_many :requests
+  has_many :rankings
 
   validates :name,
             length: { maximum: 20 },

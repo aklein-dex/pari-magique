@@ -41,8 +41,12 @@ class Manager::GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
+
     respond_to do |format|
       if @game.update(game_params)
+
+        # TODO: update the rankings
+
         format.html { redirect_to [:manager, @game], notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else

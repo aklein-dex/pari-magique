@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613114613) do
+ActiveRecord::Schema.define(version: 20170708000647) do
 
   create_table "games", force: :cascade do |t|
     t.integer "tournament_id", null: false
@@ -64,6 +64,20 @@ ActiveRecord::Schema.define(version: 20170613114613) do
     t.datetime "updated_at", null: false
     t.index ["league_id"], name: "index_members_on_league_id"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.integer "league_id_id", null: false
+    t.integer "tournament_id_id", null: false
+    t.integer "member_id_id", null: false
+    t.integer "point3", default: 0, null: false
+    t.integer "point1", default: 0, null: false
+    t.integer "point0", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["league_id_id"], name: "index_rankings_on_league_id_id"
+    t.index ["member_id_id"], name: "index_rankings_on_member_id_id"
+    t.index ["tournament_id_id"], name: "index_rankings_on_tournament_id_id"
   end
 
   create_table "requests", force: :cascade do |t|
