@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :users
   resources :members
   resources :guesses
-  resources :games
   resources :requests
 
   resources :leagues do
@@ -18,5 +17,9 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :tournaments, :stadia, :teams
+  end
+
+  namespace :manager do
+    resources :games
   end
 end

@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class Manager::GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
@@ -29,7 +29,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to [:manager, @game], notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to [:manager, @game], notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
     respond_to do |format|
-      format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
+      format.html { redirect_to manager_games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

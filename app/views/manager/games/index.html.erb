@@ -29,13 +29,13 @@
         <td><%= game.pool %></td>
         <td><%= game.stadium.name %></td>
         <td>
-          <%= link_to game, class: "action_button" do %>
+          <%= link_to [:manager, game], class: "action_button" do %>
               <i class="fa fa-info-circle"></i>
           <% end %>
-          <%= link_to edit_game_path(game), class: "action_button" do %>
+          <%= link_to edit_manager_game_path(game), class: "action_button" do %>
               <i class="fa fa-pencil-square-o"></i>
           <% end %>
-          <%= link_to game, class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= link_to [:manager, game], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class="fa fa-times"></i>
               <% end %>
         </td>
@@ -46,4 +46,4 @@
 
 <br>
 
-<%= link_to 'New Game', new_game_path %>
+<%= link_to 'New Game', new_manager_game_path %>
