@@ -36,3 +36,11 @@
   <% end %>
 </ul>
 
+<h3>Ranking</h3>
+<ul>
+  <% @rankings.each do |rank| %>
+    <li>
+      <%= rank.member.username %> | <%= rank.point3 %> | <%= rank.point1 %> | <%= rank.point0 %>
+    </li>
+  <% end %>
+</ul>
