@@ -73,6 +73,8 @@ To insert data run: ```rake db:seed```
 
 #### League wide
 
+A league is a group of users. For example, you can be a member of a league with your friends and a member of a second league with your coworkers.
+  
 ##### coach
 
 * add tournaments to a league
