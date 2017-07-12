@@ -25,6 +25,12 @@ class RequestsController < ApplicationController
           # let's create a member
           member = Member.new(:user_id => @request.user_id, :league_id =>  @request.league_id, :occupation => :player, :username => current_user.username)
           member.save
+
+          # and create a ranking for each tournament of the league
+          league = League.find(@request.league_id)
+          league.tournaments.each do |tournament|
+            ranking = Ranking.create(:member_id => member.id, :league_id =>  @request.league_id, :tournament_id => tournament.id)
+          end
         end
         format.html { redirect_to @request.league, notice: 'Request was successfully updated.' }
       else

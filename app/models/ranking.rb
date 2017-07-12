@@ -1,7 +1,7 @@
 class Ranking < ApplicationRecord
-  belongs_to :league_id
-  belongs_to :tournament_id
-  belongs_to :member_id
+  belongs_to :league
+  belongs_to :tournament
+  belongs_to :member
 
   validates :member_id, presence: true
   validates :tournament_id, presence: true

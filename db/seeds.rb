@@ -8,9 +8,19 @@
 
 # Create default admin
 user = User.new(
-    :username              => "alex",
+    :username              => "admin",
     :role                  => :admin,
-    :email                 => "alex@pari-magique.com",
+    :email                 => "admin@pm.com",
+    :password              => "123456",
+    :password_confirmation => "123456"
+)
+user.save!
+
+# Create manager
+user = User.new(
+    :username              => "manager",
+    :role                  => :manager,
+    :email                 => "manager@pm.com",
     :password              => "123456",
     :password_confirmation => "123456"
 )
@@ -19,7 +29,7 @@ user.save!
 user = User.new(
     :username              => "user1",
     :role                  => :member,
-    :email                 => "user1@pari-magique.com",
+    :email                 => "user1@pm.com",
     :password              => "123456",
     :password_confirmation => "123456"
 )
@@ -28,7 +38,7 @@ user.save!
 user = User.new(
     :username              => "user2",
     :role                  => :member,
-    :email                 => "user2@pari-magique.com",
+    :email                 => "user2@pm.com",
     :password              => "123456",
     :password_confirmation => "123456"
 )

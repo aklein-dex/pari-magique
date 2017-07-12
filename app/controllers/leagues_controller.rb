@@ -47,6 +47,14 @@ class LeaguesController < ApplicationController
   def update
     respond_to do |format|
       if @league.update(league_params)
+
+        # Did we add a tournament? If yes, then we have to create a ranking for all the members
+        if(params[:league][:tournament_ids])
+          @league.members.each do |member|
+            Ranking.create(:member_id => member.id, :tournament_id => params[:league][:tournament_ids], :league_id => @league.id)
+          end
+        end
+
         format.html { redirect_to @league, notice: 'League was successfully updated.' }
         format.json { render :show, status: :ok, location: @league }
       else
