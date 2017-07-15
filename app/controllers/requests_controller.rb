@@ -30,6 +30,8 @@ class RequestsController < ApplicationController
           league = League.find(@request.league_id)
           league.tournaments.each do |tournament|
             ranking = Ranking.create(:member_id => member.id, :league_id =>  @request.league_id, :tournament_id => tournament.id)
+
+            # TODO if there are already games played, then we should increase the value of "point0"
           end
         end
         format.html { redirect_to @request.league, notice: 'Request was successfully updated.' }
