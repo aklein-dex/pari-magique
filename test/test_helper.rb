@@ -10,3 +10,8 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+# Have to add this code otherwise I can't use "sign_in" in tests
+class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+end

@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:home]
+  skip_before_action :authenticate_user!, :only => [:home_root, :rules]
 
   # Controller for the home page that contains only the sign in/sign up button
   def home_root
@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  # Home page when a user logs in.
+  # Home page when a user is logged in.
   def home
     @all_leagues = League.all.order(:name)
     @request = Request.new

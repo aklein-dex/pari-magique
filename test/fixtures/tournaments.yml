@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tournament1:
+  name: "World Cup 2018"
+  location: "Russia"
+  year: 2018
+
+tournament2:
+  name: "World Cup 2022"
+  location: "Quatar"
+  year: 2022

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+game1:
+  tournament: tournament1
+  home: france
+  away: brazil
+  result: "2-2"
+  kickoff_at: <%= 5.day.ago %>
+  stage: :pool
+  pool: :A
+  stadium: stadium1

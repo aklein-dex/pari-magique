@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+stadium1:
+  name: "Stade de France"
+  city: "Paris"
+  capacity: 80000

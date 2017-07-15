@@ -11,7 +11,7 @@ class Tournament < ApplicationRecord
             length: { maximum: 20 },
             presence: true
   validates :year,
-            numericality: { only_integer: true },
+            numericality: { only_integer: true, greater_than: 0 },
             length: { is: 4 },
             presence: true
 end

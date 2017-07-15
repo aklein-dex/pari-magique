@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+france:
+  name: "France"
+  code: "FRA"
+  flag: "fra.png"
+  selection: :country
+
+brazil:
+  name: "Brazil"
+  code: "BRA"
+  flag: "bra.png"
+  selection: :country
+
+italia:
+  name: "Italia"
+  code: "ITA"
+  flag: "ita.png"
+  selection: :country
