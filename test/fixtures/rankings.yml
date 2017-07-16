@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ranking1:
+  member: member1
+  league: league1
+  tournament: tournament1
+  point3: 0
+  point1: 0
+  point0: 0
+

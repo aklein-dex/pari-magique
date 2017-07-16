@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+request1:
+  user: member1
+  league: league1
+  status: :pending
+
+
+request2:
+  user: member2
+  league: league1
+  status: :pending

@@ -7,7 +7,7 @@ class Ranking < ApplicationRecord
   validates :tournament_id, presence: true
   validates :league_id, presence: true
 
-  validates :point3, numericality: { only_integer: true }
-  validates :point1, numericality: { only_integer: true }
-  validates :point0, numericality: { only_integer: true }
+  validates :point3, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :point1, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :point0, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end

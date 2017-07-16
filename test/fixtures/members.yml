@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+member1:
+  user: member1
+  league: league1
+  occupation: :coach
+  username: "member1"
+
+
+member2:
+  user: member2
+  league: league1
+  occupation: :player
+  username: "member2"
