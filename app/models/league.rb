@@ -11,4 +11,19 @@ class League < ApplicationRecord
             presence: true
 
 
+  # Used to get the leagues of the user.
+  def self.for_user(user)
+    #joins(:users).where("users.id" => user.id)
+    joins(:users).where(users: { id: user.id })
+  end
+
+  # Used to get the leagues of the user that have not been approved yet (still pending).
+  def self.with_pending_requests(user)
+    joins(:requests).where(requests: { user_id: user.id, status: Request.statuses[:pending] })
+  end
+
+  # Used to get the leagues that a user can send a request to.
+  def self.can_send_request(user)
+    left_outer_joins(:requests).where("requests.id is null or requests.user_id != ?", user.id).where("leagues.id not in (select league_id from members where user_id = ?)", user.id)
+  end
 end

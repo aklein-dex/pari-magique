@@ -5,3 +5,17 @@ league1:
 
 league2:
   name: "2nd League"
+
+league3:
+  name: "3rd League"
+
+league4:
+  name: "4th League"
+
+league5:
+  name: "5th League"
+
+league6:
+  name: "6th League"
+
+# Note: if you add more leagues, you need to modify tests in league_test

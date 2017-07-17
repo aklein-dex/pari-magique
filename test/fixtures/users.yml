@@ -12,15 +12,15 @@ manager:
   role: :manager
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
-member1:
-  username: member1
-  email: member1@pm.com
+user1:
+  username: user1
+  email: user1@pm.com
   role: :member
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
-member2:
-  username: member2
-  email: member2@pm.com
+user2:
+  username: user2
+  email: user2@pm.com
   role: :member
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 

@@ -6,7 +6,14 @@
 Your league(s):
 <br>
 
-<% current_user.leagues.each do |league| %>
+<% @joined_leagues.each do |league| %>
+    <%= link_to league.name, league %>
+<% end %>
+<br><br>
+
+Leagues waiting for answer:
+<br>
+<% @pending_leagues.each do |league| %>
     <%= link_to league.name, league %>
 <% end %>
 
@@ -16,7 +23,7 @@ Your league(s):
 Join an existing league:
 <br>
 <ul>
-<% @all_leagues.each do |league| %>
+<% @possible_leagues.each do |league| %>
     <li>
       <%= form_for @request  do |form| %>
         <%= form.hidden_field :league_id, id: :league_id, value: league.id %>

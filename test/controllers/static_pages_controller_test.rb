@@ -4,7 +4,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @base_title = "Pari-magique"
-    @member = users(:member1)
+    @user = users(:user1)
   end
 
   test "should get home when user not logged in" do
@@ -22,7 +22,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get home when user is logged in" do
-    sign_in @member
+    sign_in @user
     get static_pages_home_url
     assert_response :success
     assert_select "a[href=?]", new_user_registration_path, false, "This page must not contain a sign up link"

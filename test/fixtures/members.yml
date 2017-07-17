@@ -1,14 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# User1 is a coach of league1
 member1:
-  user: member1
+  user: user1
   league: league1
   occupation: :coach
   username: "member1"
 
-
+# User 2 is player of league1 and a coach of league2
 member2:
-  user: member2
+  user: user2
   league: league1
   occupation: :player
+  username: "member2"
+
+member21:
+  user: user2
+  league: league2
+  occupation: :coach
   username: "member2"

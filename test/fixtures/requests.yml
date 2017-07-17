@@ -1,12 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+##### Request for user1 #####
 request1:
-  user: member1
-  league: league1
+  user: user1
+  league: league3
   status: :pending
-
 
 request2:
-  user: member2
-  league: league1
+  user: user1
+  league: league4
+  status: :rejected
+
+request4:
+  user: user1
+  league: league5
   status: :pending
+
+##### Request for user2 #####
+request3:
+  user: user2
+  league: league1
+  status: :accepted

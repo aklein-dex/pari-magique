@@ -8,5 +8,5 @@ class Request < ApplicationRecord
 
   enum status: [:pending, :accepted, :rejected]
 
-  scope :pending, -> { where("status = ?", Request.statuses[:pending]).includes(:user)}
+  scope :pending, -> { where(status: Request.statuses[:pending]).includes(:user)}
 end
