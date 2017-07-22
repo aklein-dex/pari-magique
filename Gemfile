@@ -53,6 +53,9 @@ group :development, :test do
   gem 'sqlite3'
   # To show colors in test results
   gem 'minitest-reporters'
+
+  # To use assert_template in tests
+  gem 'rails-controller-testing'
 end
 
 group :development do

@@ -9,6 +9,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  include ApplicationHelper
+
 end
 
 # Have to add this code otherwise I can't use "sign_in" in tests

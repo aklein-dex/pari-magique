@@ -11,8 +11,6 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     get root_url
     assert_response :success
     assert_select "title", "Home | #{@base_title}"
-    assert_select "a[href=?]", new_user_registration_path
-    assert_select "a[href=?]", new_user_session_path
   end
 
   test "should get rules" do
@@ -25,7 +23,5 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get static_pages_home_url
     assert_response :success
-    assert_select "a[href=?]", new_user_registration_path, false, "This page must not contain a sign up link"
-    assert_select "a[href=?]", new_user_session_path, false, "This page must not contain a sign in link"
   end
 end
