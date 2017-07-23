@@ -3,32 +3,41 @@
 
 <p>Welcome <%= current_user.username %></p>
 
-Your league(s):
-<br>
+<div id="joined_leagues">
+  <h3>Your league(s)</h3>
 
-<% @joined_leagues.each do |league| %>
-    <%= link_to league.name, league %>
-<% end %>
+  <% @joined_leagues.each do |league| %>
+      <%= link_to league.name, league %>
+  <% end %>
+</div>
 <br><br>
 
-Leagues waiting for answer:
-<br>
-<% @pending_leagues.each do |league| %>
-    <%= link_to league.name, league %>
-<% end %>
+<div id="pending_leagues">
+  Leagues waiting for answer:
+  <br>
+  <% @pending_leagues.each do |league| %>
+      <%= link_to league.name, league %>
+  <% end %>
+</div>
 
 <br><br>
 <%= link_to 'Create a league', new_league_path %>
 <br><br>
-Join an existing league:
-<br>
-<ul>
-<% @possible_leagues.each do |league| %>
-    <li>
-      <%= form_for @request  do |form| %>
-        <%= form.hidden_field :league_id, id: :league_id, value: league.id %>
-        <%= link_to league.name, league %> <%= form.submit "Send request", class: "btn btn-primary" %>
-      <% end %>
-    </li>
-<% end %>
-</ul>
+
+<div id="possible_leagues">
+
+<% if @possible_leagues.size > 0 %>
+  Join an existing league:
+  <br>
+  <ul>
+  <% @possible_leagues.each do |league| %>
+      <li>
+        <%= form_for @request  do |form| %>
+          <%= form.hidden_field :league_id, id: :league_id, value: league.id %>
+          <%= link_to league.name, league %> <%= form.submit "Send request", class: "btn btn-primary" %>
+        <% end %>
+      </li>
+  <% end %>
+  </ul>
+  <% end %>
+</div>

@@ -21,3 +21,9 @@ request3:
   user: user2
   league: league1
   status: :accepted
+
+##### Request for user3 #####
+request43:
+  user: user3
+  league: league1
+  status: :pending

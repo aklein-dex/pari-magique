@@ -24,6 +24,12 @@ user2:
   role: :member
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
+user_nothing:
+  username: user3
+  email: user3@pm.com
+  role: :member
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
 #<% 30.times do |n| %>
 #user_<%= n %>:
 #  name:  <%= "User #{n}" %>
