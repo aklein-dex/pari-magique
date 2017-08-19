@@ -18,30 +18,32 @@ class LeaguesController < ApplicationController
   end
 
   # POST /leagues
-  # POST /leagues.json
   def create
     @league = League.new(league_params)
 
-    # TODO use transaction!
-    respond_to do |format|
-      if @league.save
+    begin
+      League.transaction do
+        @league.save!
         member = Member.new(:user_id => current_user.id, :league_id =>  @league.id, :occupation => :coach, :username => current_user.username)
-        member.save
+        member.save!
 
-        format.html { redirect_to @league, notice: 'League was successfully created.' }
-        format.json { render :show, status: :created, location: @league }
-      else
-        format.html { render :new }
-        format.json { render json: @league.errors, status: :unprocessable_entity }
+        redirect_to @league, notice: 'League was successfully created.'
+        return
       end
+    rescue ActiveRecord::RecordInvalid => error
+      status = :internal_server_error
+    rescue ActiveModel::UnknownAttributeError => error
+      status = :bad_request
     end
+
+    render :new, :status => status
   end
 
   # PATCH/PUT /leagues/1
-  # PATCH/PUT /leagues/1.json
   def update
-    respond_to do |format|
-      if @league.update(league_params)
+    begin
+      League.transaction do
+        @league.update(league_params)
 
         # Did we add a tournament? If yes, then we have to create a ranking for all the members
         if(params[:league][:tournament_ids])
@@ -50,13 +52,16 @@ class LeaguesController < ApplicationController
           end
         end
 
-        format.html { redirect_to @league, notice: 'League was successfully updated.' }
-        format.json { render :show, status: :ok, location: @league }
-      else
-        format.html { render :edit }
-        format.json { render json: @league.errors, status: :unprocessable_entity }
+        redirect_to @league, notice: 'League was successfully updated.'
+        return
       end
+    rescue ActiveRecord::RecordInvalid => error
+      status = :internal_server_error
+    rescue ActiveModel::UnknownAttributeError => error
+      status = :bad_request
     end
+
+    render :edit, :status => status
   end
 
   # DELETE /leagues/1
@@ -72,11 +77,12 @@ class LeaguesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_league
-      @league = League.find(params[:id])
+      @league = League.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def league_params
-      params.require(:league).permit(:name, :tournament_ids)
+      #params.require(:league).permit(:name, :tournament_ids)
+      params.fetch(:league, {}).permit(:name, :tournament_ids)
     end
 end

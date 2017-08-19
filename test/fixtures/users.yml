@@ -24,9 +24,15 @@ user2:
   role: :member
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
-user_nothing:
+user3:
   username: user3
   email: user3@pm.com
+  role: :member
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+user_nothing:
+  username: user_nothing
+  email: user_nothing@pm.com
   role: :member
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
