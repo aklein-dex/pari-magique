@@ -1,10 +1,15 @@
 <% provide(:title, "Home") %>
-<h1>Pari-magique</h1>
+<div class="jumbotron" style="background: url('images/background.jpg') no-repeat center center;">
+  <h1 class="text-white">Pari-magique</h1>
+  <br>
+  <p class="text-center text-white">Are you ready to bet on soccer games and have fun with your friends?</p>
+  <br><br>
+  <p class="text-center">
+    <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
+    <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
+  </p>
 
-<p>Are you ready to bet on soccer games?</p>
 
-<p>Create an account and place your bets!</p>
-<%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary" %>
+</div>
 
-<p>Already have an account? Then sign in!</p>
-<%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
+
