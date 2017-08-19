@@ -2,11 +2,6 @@ class LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
-  # GET /leagues
-  # GET /leagues.json
-  def index
-    @leagues = League.all
-  end
 
   # GET /leagues/1
   # GET /leagues/1.json

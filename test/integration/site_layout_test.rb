@@ -29,6 +29,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_user_registration_path, false, "This page must not contain a sign up link"
     assert_select "a[href=?]", new_user_session_path, false, "This page must not contain a sign in link"
     assert_select "a[href=?]", admin_teams_path, false, "This page must not contain a teams link"
+    assert_select "a[href=?]", admin_leagues_path, false, "This page must not contain a leagues link"
     assert_select "a[href=?]", admin_tournaments_path, false, "This page must not contain a tournament link"
     assert_select "a[href=?]", manager_games_path, false, "This page must not contain a game link"
   end
@@ -41,6 +42,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", edit_user_registration_path
     assert_select "a[href=?]", destroy_user_session_path
     assert_select "a[href=?]", admin_teams_path
+    assert_select "a[href=?]", admin_leagues_path
     assert_select "a[href=?]", admin_tournaments_path
     assert_select "a[href=?]", manager_games_path
     assert_select "a[href=?]", new_user_registration_path, false, "This page must not contain a sign up link"
@@ -56,6 +58,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", destroy_user_session_path
     assert_select "a[href=?]", manager_games_path
     assert_select "a[href=?]", admin_teams_path, false, "This page must not contain a teams link"
+    assert_select "a[href=?]", admin_leagues_path, false, "This page must not contain a leagues link"
     assert_select "a[href=?]", admin_tournaments_path, false, "This page must not contain a tournament link"
     assert_select "a[href=?]", new_user_registration_path, false, "This page must not contain a sign up link"
     assert_select "a[href=?]", new_user_session_path, false, "This page must not contain a sign in link"

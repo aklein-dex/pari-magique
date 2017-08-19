@@ -12,12 +12,12 @@ Rails.application.routes.draw do
   resources :guesses
   resources :requests
 
-  resources :leagues do
+  resources :leagues, :except => [:index] do
     resources :tournaments
   end
   
   namespace :admin do
-    resources :tournaments, :stadia, :teams
+    resources :tournaments, :stadia, :teams, :leagues
   end
 
   namespace :manager do
