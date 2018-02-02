@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access denied."
     redirect_to root_url, :alert => exception.message
   end
+  
+  # After logging in, the user is redirected to the home page
+  def after_sign_in_path_for(resource)
+    static_pages_home_path
+  end
 
   protected
 
