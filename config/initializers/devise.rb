@@ -1,3 +1,10 @@
+Rails.application.config.to_prepare do
+  Devise::RegistrationsController.layout proc { |controller| user_signed_in? ? "application" : "borderless" }
+  Devise::PasswordsController.layout "borderless"
+  Devise::SessionsController.layout "borderless"
+  # And/or Sessions, Confirmations, Unlocks, Passwords
+end
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|

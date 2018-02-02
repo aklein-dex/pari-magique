@@ -33,6 +33,8 @@ Ruby version **2.3.4** (latest version supported by Heroku)
 
 TODO
 
+bundle install --without production
+
 ### Tests
 
 How to run the test suite. TODO

@@ -1,13 +1,6 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:root, :rules]
-
-  # Controller for the home page that contains only the sign in/sign up button
-  def root
-    if user_signed_in?
-      redirect_to static_pages_home_url
-    end
-  end
-
+  skip_before_action :authenticate_user!, :only => [:rules]
+  
   # Home page when a user is logged in.
   def home
     # leagues with pending request
@@ -22,4 +15,5 @@ class StaticPagesController < ApplicationController
 
   def rules
   end
+  
 end
