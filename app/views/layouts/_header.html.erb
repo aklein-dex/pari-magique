@@ -1,17 +1,16 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   
-    <%= link_to "Pari-magique", root_path, id: "logo", class: "navbar-brand" %>
-    
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav">
-        <li class="nav-item"><%= link_to "Rules",  rules_path, class: "nav-link" %></li>
+      <%= link_to "Pari-magique", root_path, id: "logo", class: "navbar-brand" %>
 
-        <% if user_signed_in? %>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><%= link_to "Rules",  rules_path, class: "nav-link" %></li>
 
-          <% if current_user.manager? or current_user.admin? %>
+          <% if user_signed_in? and current_user.manager? or current_user.admin? %>
             <li class="dropdown nav-item">
               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Admin <b class="caret"></b></a>
               <div class="dropdown-menu">
@@ -27,20 +26,25 @@
               </div>
             </li>
           <% end %>
-
-          <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Account <b class="caret"></b></a>
-            <div class="dropdown-menu">
-              <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </li>
-          
-        <% else %>
-          <li class="nav-item"><%= link_to "Sign in", new_user_session_path, class: "nav-link" %></li>
-          <li class="nav-item my-2 my-md-0"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
-        <% end %>
-      </ul>
-   </div> 
-  
-</nav>
+        </ul>
+        
+        <ul class="navbar-nav justify-content-end">
+          <% if user_signed_in? %>
+            <li class="dropdown nav-item">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><%= icon('user-circle')%> <%= current_user.username %> <b class="caret"></b></a>
+              <div class="dropdown-menu">
+                <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+                  <%= icon('cog')%> Profile
+                <% end %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                  <%= icon('sign-out')%> Log out
+                <% end %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item"><%= link_to "Sign in", new_user_session_path, class: "nav-link" %></li>
+            <li class="nav-item my-2 my-md-0"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
+          <% end %>
+          </ul>
+      </div>
+    </nav>
