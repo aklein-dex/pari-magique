@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :guesses
   resources :requests
 
-  resources :leagues, :except => [:index] do
+  resources :leagues do
     resources :tournaments
   end
   

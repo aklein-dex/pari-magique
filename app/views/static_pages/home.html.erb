@@ -1,14 +1,6 @@
 <% provide(:title, "Home") %>
 <h1>Pari-magique</h1>
 
-<div id="joined_leagues">
-  <h3>Your league(s)</h3>
-
-  <% @joined_leagues.each do |league| %>
-      <%= link_to league.name, league %>
-  <% end %>
-</div>
-<br><br>
 
 <div id="pending_leagues">
   Leagues waiting for answer:
@@ -17,10 +9,6 @@
       <%= link_to league.name, league %>
   <% end %>
 </div>
-
-<br><br>
-<%= link_to 'Create a league', new_league_path %>
-<br><br>
 
 <div id="possible_leagues">
 

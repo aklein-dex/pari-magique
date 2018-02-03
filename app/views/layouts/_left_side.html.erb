@@ -1,0 +1,27 @@
+<ul class="nav nav-pills flex-column">
+  <li class="nav-item">
+      <h2 style="margin-top: 15px">Leagues</h2>
+  </li>
+
+  <% joined_leagues.each do |league|
+    class_attr = "nav-link" 
+    if controller_name == 'leagues' and @league and @league.id == league.id
+      class_attr += " active"
+    end
+    %>
+    <li class="nav-item">
+      <%= link_to league.name, league, class: class_attr %>
+    </li>
+  <% end %>
+  
+  <li class="nav-item">
+    <%= link_to new_league_path, class: "nav-link" do %>
+      <%= icon("plus-square")%> Create a league
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to leagues_path, class: "nav-link" do %>
+      <%= icon("user-plus")%> Join existing league
+    <% end %>
+  </li>
+</ul>
