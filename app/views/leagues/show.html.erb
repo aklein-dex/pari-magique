@@ -1,65 +1,83 @@
 <% provide(:title, "League") %>
 
-<h1><%= @league.name %></h1>
-
-<% if can? :update, @league %>
-  <%= link_to 'Edit', edit_league_path(@league) %>
-<% end %>
-
-<h3>Members</h3>
-
-<ul>
-<% @league.users.each do |user| %>
-  <li><%= user.username %> (<%= user.league_occupation(@league.id) %>)</li>
-<% end %>
-</ul>
-
-<% if can? :update, @league %>
-
-  <h3>Requests</h3>
-
-  <ul>
-  <% @league.requests.pending.each do |request| %>
-      <li>
-        <%= request.user.username %>
-        <%= form_for request  do |form| %>
-          <%= form.hidden_field :status, id: :request_status, value: "accepted" %>
-          <%= form.submit "Accept", class: "btn btn-primary" %>
-        <% end %>
-
-        <%= form_for request  do |form| %>
-            <%= form.hidden_field :status, id: :request_status, value: "rejected" %>
-            <%= form.submit "Reject", class: "btn btn-primary" %>
-        <% end %>
-      </li>
+<h1>
+  <%= @league.name %>
+  <% if can? :update, @league %>
+    <%= link_to edit_league_path(@league) do %>
+      <%= icon('edit') %>
+    <% end %>
   <% end %>
-  </ul>
-<% end %>
+</h1>
 
-<h3>Tournaments</h3>
-<ul>
-  <% @league.tournaments.each do |tournament| %>
-    <li>
-      <%= link_to [@league, tournament], class: "action_button" do %>
-          <i class="fa fa-info-circle"></i><%= tournament.name %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<div class="container marketing">
 
-<% if can? :update, @league %>
-
-  Add tournament:<br>
-  <ul>
-    <% Tournament.all.each do |tournament| %>
-        <li>
-          <%= tournament.name %>
-          <%= form_for @league do |form| %>
-              <%= form.hidden_field :league_id, id: :league_id, value: @league_id %>
-              <%= form.hidden_field :tournament_ids, id: :tournament_id, value: tournament.id %>
-              <%= form.submit "Add", class: "btn btn-primary" %>
+  <div class="row">
+  
+    <div class="col-lg-4">
+      <div class="league-box">
+      <h2>Tournaments</h2>
+      <ul class="list-group">
+        <% @league.tournaments.each do |tournament| %>
+        <li class="list-group-item">
+          <%= link_to [@league, tournament], class: "action_button" do %>
+            <%= icon('trophy') %> <%= tournament.name %>
           <% end %>
         </li>
+        <% end %>
+      </ul>
+
+      <% if can? :update, @league %>
+      Add tournament:<br>
+      <ul class="list-group">
+        <% Tournament.all.each do |tournament| %>
+            <li class="list-group-item">
+              <%= tournament.name %>
+              <%= form_for @league do |form| %>
+                <%= form.hidden_field :league_id, id: :league_id, value: @league_id %>
+                <%= form.hidden_field :tournament_ids, id: :tournament_id, value: tournament.id %>
+                <%= form.submit "Add", class: "btn btn-primary" %>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+      <% end %>
+      </div>
+    </div><!-- /.col-lg-4 -->
+  
+
+    <div class="col-lg-4">
+      <div class="league-box">
+      <h2>Players</h2>
+      <ul class="list-group">
+        <% @league.users.each do |user| %>
+          <li class="list-group-item"><%= user.username %> (<%= user.league_occupation(@league.id) %>)</li>
+        <% end %>
+      </ul>
+      </div>
+    </div><!-- /.col-lg-4 -->
+  
+    <% if can? :update, @league %>
+    <div class="col-lg-4">
+      <div class="league-box">
+        <h2>Requests</h2>
+        <ul class="list-group">
+        <% @league.requests.pending.each do |request| %>
+          <li class="list-group-item">
+            <%= request.user.username %>
+            <%= form_for request  do |form| %>
+              <%= form.hidden_field :status, id: :request_status, value: "accepted" %>
+              <%= form.submit "Accept", class: "btn btn-primary", style: "margin-left: 5px" %>
+            <% end %>
+
+            <%= form_for request  do |form| %>
+              <%= form.hidden_field :status, id: :request_status, value: "rejected" %>
+              <%= form.submit "Reject", class: "btn btn-outline-danger", style: "margin-left: 5px" %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div><!-- /.col-lg-4 -->
     <% end %>
-  </ul>
-<% end %>
+  </div>  
+</div>

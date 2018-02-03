@@ -1,3 +1,12 @@
 // Place all the styles related to the Leagues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.league-box {
+  -webkit-box-shadow:0 2px 3px rgba(0,0,0,0.55);
+  -moz-box-shadow:0 2px 3px rgba(0,0,0,0.55);
+  box-shadow:0 2px 3px rgba(0,0,0,0.55);
+  border:1px solid #818c94;
+  border:1px solid rgba(0,0,0,0.4);
+  padding: 10px;
+  margin: 5px;
+}
