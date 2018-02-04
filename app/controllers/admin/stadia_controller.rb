@@ -2,6 +2,16 @@ class Admin::StadiaController < ApplicationController
   before_action :set_stadium, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  # receive a csv file containing a list of stadiums
+  def import
+    if params[:file]
+      Stadium.import(params[:file])
+      redirect_to admin_stadia_url, notice: 'Stadiums were successfully imported.'
+    else
+      redirect_to admin_stadia_url, alert: 'No file specified.'
+    end
+  end
+  
   # GET /stadia
   # GET /stadia.json
   def index

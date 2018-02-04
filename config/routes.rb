@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    resources :tournaments, :stadia, :leagues
+    resources :tournaments, :leagues
+    
+    resources :stadia do
+      collection { post :import }
+    end
     
     resources :teams do
       collection { post :import }

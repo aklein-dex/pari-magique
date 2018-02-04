@@ -45,12 +45,6 @@ user = User.new(
 user.save!
 
 
-Stadium.create!(
-    :name => "Stade de France",
-    :city => "Paris",
-    :capacity => 80000
-)
-
 Tournament.create!(
     :name => "World Cup 2018",
     :location => "Russie",

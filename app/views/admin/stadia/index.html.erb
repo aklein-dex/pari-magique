@@ -1,7 +1,8 @@
 <% provide(:title, "Stadiums") %>
+<div class="container">
 <h1>Stadiums</h1>
 
-<table class="table table-striped stadium-table-witdh">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -35,3 +36,13 @@
 <br>
 
 <%= link_to 'New Stadium', new_admin_stadium_path %>
+
+
+<br>
+<hr>
+Import stadiums from csv file: 
+<%= form_tag import_admin_stadia_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+</div>
