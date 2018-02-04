@@ -44,33 +44,6 @@ user = User.new(
 )
 user.save!
 
-Team.create!(
-    :name => "France",
-    :code => "FRA",
-    :flag => "fra.gif",
-    :selection => 0
-)
-
-Team.create!(
-    :name => "Pologne",
-    :code => "POL",
-    :flag => "pol.gif",
-    :selection => 0
-)
-
-Team.create!(
-    :name => "Grèce",
-    :code => "GRC",
-    :flag => "grc.gif",
-    :selection => 0
-)
-
-Team.create!(
-    :name => "Russie",
-    :code => "RUS",
-    :flag => "rus.gif",
-    :selection => 0
-)
 
 Stadium.create!(
     :name => "Stade de France",

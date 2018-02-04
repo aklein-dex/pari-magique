@@ -2,6 +2,16 @@ class Admin::TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  # receive a csv file containing a list of teams
+  def import
+    if params[:file]
+      Team.import(params[:file])
+      redirect_to admin_teams_url, notice: 'Teams were successfully imported.'
+    else
+      redirect_to admin_teams_url, alert: 'No file specified.'
+    end
+  end
+  
   # GET /teams
   # GET /teams.json
   def index

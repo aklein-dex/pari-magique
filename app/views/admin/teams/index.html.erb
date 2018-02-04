@@ -1,14 +1,15 @@
 <% provide(:title, "Teams") %>
+<div class="container">
 <h1>Teams</h1>
 
-<table class="table table-striped team-table-witdh">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Code</th>
       <th>Flag</th>
       <th>Type</th>
-      <th></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -17,7 +18,7 @@
       <tr>
         <td><%= team.name %></td>
         <td><%= team.code %></td>
-        <td><%= team.flag %></td>
+        <td><%= image_tag(team.flag_path) %> <%= team.flag %></td>
         <td><%= team.selection %></td>
         <td>
           <%= link_to [:admin, team], class: "action_button" do %>
@@ -38,3 +39,12 @@
 <br>
 
 <%= link_to 'New Team', new_admin_team_path %>
+
+<br>
+<hr>
+Import teams from csv file: 
+<%= form_tag import_admin_teams_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+</div>
