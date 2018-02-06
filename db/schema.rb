@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20170708000647) do
     t.string "result", limit: 5, default: "", null: false
     t.datetime "kickoff_at", null: false
     t.integer "stage", default: 0
-    t.integer "pool"
+    t.integer "round"
+    t.integer "group"
     t.integer "stadium_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,7 +93,7 @@ ActiveRecord::Schema.define(version: 20170708000647) do
   end
 
   create_table "stadia", force: :cascade do |t|
-    t.string "name", limit: 20, null: false
+    t.string "name", limit: 40, null: false
     t.string "city", limit: 20, null: false
     t.integer "capacity", limit: 5, null: false
     t.datetime "created_at", null: false

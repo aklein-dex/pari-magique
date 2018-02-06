@@ -47,6 +47,6 @@ user.save!
 
 Tournament.create!(
     :name => "World Cup 2018",
-    :location => "Russie",
+    :location => "Russia",
     :year => 2018
 )

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
-    resources :games
+    resources :games do
+      collection { post :import }
+    end
   end
 end

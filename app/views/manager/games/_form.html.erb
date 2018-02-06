@@ -54,9 +54,16 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label :pool, class: 'col-2 col-form-label' %>
+    <%= form.label :round, class: 'col-2 col-form-label' %>
     <div class="col-10">
-      <%= form.select :pool, Game.pools.keys, id: :game_pool %>
+      <%= form.select :round, Game.rounds.keys, id: :game_round %>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <%= form.label :group, class: 'col-2 col-form-label' %>
+    <div class="col-10">
+      <%= form.select :group, Game.groups.keys, id: :game_group %>
     </div>
   </div>
 

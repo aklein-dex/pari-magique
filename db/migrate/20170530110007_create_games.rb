@@ -7,7 +7,8 @@ class CreateGames < ActiveRecord::Migration[5.1]
       t.string :result, null: false, default: "", limit: 5
       t.datetime :kickoff_at, null: false
       t.integer :stage, default: 0
-      t.integer :pool
+      t.integer :round
+      t.integer :group
       t.belongs_to :stadium, foreign_key: true, null: false
 
       t.timestamps

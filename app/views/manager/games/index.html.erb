@@ -1,5 +1,5 @@
 <% provide(:title, "Games") %>
-
+<div class="container">
 <h1>Games</h1>
 
 <table class="table table-striped">
@@ -9,9 +9,10 @@
       <th>Home</th>
       <th>Away</th>
       <th>Result</th>
-      <th>kickoff_at</th>
+      <th>Kickoff At</th>
       <th>Stage</th>
-      <th>Pool</th>
+      <th>Round</th>
+      <th>Group</th>
       <th>Stadium</th>
       <th></th>
     </tr>
@@ -26,7 +27,8 @@
         <td><%= game.result %></td>
         <td><%= game.kickoff_at %></td>
         <td><%= game.stage %></td>
-        <td><%= game.pool %></td>
+        <td><%= game.round %></td>
+        <td><%= game.group %></td>
         <td><%= game.stadium.name %></td>
         <td>
           <%= link_to [:manager, game], class: "action_button" do %>
@@ -47,3 +49,14 @@
 <br>
 
 <%= link_to 'New Game', new_manager_game_path %>
+
+
+<br>
+<hr>
+Import games from csv file: 
+<%= form_tag import_manager_games_path, multipart: true do %>
+  <%= select_tag "tournament_id", options_from_collection_for_select(Tournament.all, "id", "name") %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+</div>
