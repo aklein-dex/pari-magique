@@ -2,7 +2,6 @@
 <div class="container">
 
 <h1><%= @tournament.name %>, <%= @tournament.location %></h1>
-<h2><%= @league.name %></h2>
 
 
 <%= render partial: 'games', locals: { past: false, games: @coming_games } %>

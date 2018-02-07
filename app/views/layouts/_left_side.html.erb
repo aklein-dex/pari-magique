@@ -5,7 +5,7 @@
 
   <% joined_leagues.each do |league|
     class_attr = "nav-link" 
-    if controller_name == 'leagues' and @league and @league.id == league.id
+    if (controller_name == 'leagues' or controller_name == 'tournaments' ) and @league and @league.id == league.id
       class_attr += " active"
     end
     %>
