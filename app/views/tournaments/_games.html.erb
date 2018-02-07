@@ -1,0 +1,57 @@
+<% if past %>
+  <h3>Last 5 games</h3>
+<% else %>
+  <h3>Next 5 coming games</h3>
+<% end %>
+
+
+<table class="table">
+  <tbody>
+    
+  <% games.each do |game| %>
+    <tr>
+      <td>
+        <%= game.kickoff_at %>
+        <br>
+        <% if game.group != nil %>
+          Group <%= game.group %>,
+        <% end %>
+        <%= game.round %>
+        <br>
+        <%= game.stadium.name %>
+      </td>
+      <td class="flag_size_col"><%= image_tag(game.home.flag_path) %></td>
+      <td class="big_font"><%= game.home.name %></td>
+      <td class="center">
+      <% # this is not correct!!!!!!!!!! Because it fetches all the guesses for all users, and not for the current user!!!!! 
+         if game.guesses[0] != nil 
+          temp = game.guesses[0]
+         else
+           temp = @guess
+         end
+      %>
+      <% if past %>
+        <span class="big_font"><%= game.result %></span>
+        <br>
+        <% if temp.result %>
+          <span class="badge <%= getBadgeClass(game.result, temp.result) %>"><%= temp.result %></span>
+        <% else %>
+          n/a
+        <% end %>
+      <% else %>
+        <%= form_for temp do |form| %>
+          <%= form.hidden_field :id,        id: :id,             value: temp.id %>
+          <%= form.hidden_field :game_id,   id: :game_id,        value: game.id %>
+          <%= form.hidden_field :league_id, id: :game_league_id, value: @league.id %>
+          <%= form.text_field   :result,    id: :guess_result,   value: temp.result, size: 5 %>
+          <%= form.submit "Update", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+      </td>
+      <td class="big_font"><%= game.away.name %></td>
+      <td class="flag_size_col"><%= image_tag(game.away.flag_path) %></td>
+      
+    </tr>
+  <% end %>
+  </tbody>
+</table>

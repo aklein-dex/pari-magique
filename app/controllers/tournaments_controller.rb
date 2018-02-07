@@ -4,8 +4,9 @@ class TournamentsController < ApplicationController
 
 
   def show
-    @coming_games = @tournament.games.next_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}")
-    @last_games   = @tournament.games.last_5_games
+    # todo not sure it is using the guesses correctly!
+    @coming_games = @tournament.games.includes(:home, :away, :stadium).next_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}")
+    @last_games   = @tournament.games.includes(:home, :away, :stadium).last_5_games
     @guess        = Guess.new(:league => @league)
     @rankings     = Ranking.where(:league_id => @league.id, :tournament_id => @tournament.id)
   end

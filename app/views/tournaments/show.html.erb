@@ -1,46 +1,18 @@
 <% provide(:title,  @tournament.name) %>
+<div class="container">
 
 <h1><%= @tournament.name %>, <%= @tournament.location %></h1>
 <h2><%= @league.name %></h2>
 
-<h3>Ranking</h3>
-<br>
-<h3>Next 5 coming games</h3>
-<ul>
-<% @coming_games.each do |game| %>
-    <li>
-      <%= game.home.name %> vs <%= game.away.name %>
-      <% if game.guesses[0] != nil
-          temp = game.guesses[0]
-         else
-           temp = @guess
-         end
-      %>
-      <%= form_for temp do |form| %>
-          <%= form.hidden_field :id,        id: :id,             value: temp.id %>
-          <%= form.hidden_field :game_id,   id: :game_id,        value: game.id %>
-          <%= form.hidden_field :league_id, id: :game_league_id, value: @league.id %>
-          <%= form.text_field   :result,    id: :guess_result,   value: temp.result %>
-          <div class="actions">
-            <%= form.submit "Submit", class: "btn btn-primary" %>
-          </div>
-      <% end %>
-    </li>
-<% end %>
-</ul>
-<br>
-<h3>Last 5 games</h3>
-<ul>
-  <% @last_games.each do |game| %>
-      <li><%= game.home.name %> vs <%= game.away.name %> <%= game.result %></li>
-  <% end %>
-</ul>
 
-<h3>Ranking</h3>
-<ul>
-  <% @rankings.each do |rank| %>
-    <li>
-      <%= rank.member.username %> | <%= rank.point3 %> | <%= rank.point1 %> | <%= rank.point0 %>
-    </li>
-  <% end %>
-</ul>
+<%= render partial: 'games', locals: { past: false, games: @coming_games } %>
+<br>
+
+
+<%= render partial: 'games', locals: { past: true, games: @last_games } %>
+<br>
+
+<%= render 'ranking' %>
+
+
+</div>

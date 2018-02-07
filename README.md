@@ -18,6 +18,7 @@ In 2017, I decided to switch to Rails because it is my favorite Web framework an
   * add basic authorization 
 * Phase 2
   * implements a quick prototype with some basic features (to have a better idea of the final project)
+  * This should be done before the World Cup 2018 in Russia!
 * Phase 3
   * review all features one by one (improve them and create tests)
 * Phase 4
@@ -33,7 +34,9 @@ Ruby version **2.3.4** (latest version supported by Heroku)
 
 TODO
 
+```
 bundle install --without production
+```
 
 ### Tests
 
