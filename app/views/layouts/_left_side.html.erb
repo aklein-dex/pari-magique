@@ -3,14 +3,18 @@
       <h2 style="margin-top: 15px">Leagues</h2>
   </li>
 
-  <% joined_leagues.each do |league|
-    class_attr = "nav-link" 
-    if (controller_name == 'leagues' or controller_name == 'tournaments' ) and @league and @league.id == league.id
-      class_attr += " active"
-    end
-    %>
+  <% joined_leagues.each do |league| %>
     <li class="nav-item">
-      <%= link_to league.name, league, class: class_attr %>
+      <%= link_to league.name, league, class: "nav-link #{is_league_active(league)}" %>
+      <ul class="nav nav-pills flex-column">
+        <% league.tournaments.each do |tournament| %>
+          <li class="nav-item" style="padding-left: 15px">
+            <%= link_to [league, tournament], class: "nav-link #{is_tournament_active(tournament)}" do %>
+              <%= icon('trophy') %> <%= tournament.name %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </li>
   <% end %>
   

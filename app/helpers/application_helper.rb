@@ -1,8 +1,15 @@
 module ApplicationHelper
   def joined_leagues
-    @joined_leagues = League.for_user(current_user)
+    @joined_leagues = League.for_user(current_user).includes(:tournaments)
   end
   
+  def is_league_active(league)
+    return "active" if controller_name == 'leagues' and @league and @league.id == league.id
+  end
+  
+  def is_tournament_active(tournament)
+    return "active" if controller_name == 'tournaments' and @tournament and @tournament.id = tournament.id 
+  end
   
   # return: 
   #  0 if the result and guess are different
