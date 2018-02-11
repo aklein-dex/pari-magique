@@ -25,6 +25,8 @@ module ApplicationHelper
   #  1 if the winning team is correct (or draw)
   #  3 if the result matches the guess
   def getPoints(result, guess)
+    return 0 if guess.empty? or guess == "-" or guess == "n/a"
+    
     if result == guess
       3
     elsif winning_team(result) == winning_team(guess)
