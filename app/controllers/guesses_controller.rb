@@ -25,19 +25,43 @@ class GuessesController < ApplicationController
   # POST /guesses
   # POST /guesses.json
   def create
-    @guess = Guess.new(guess_params)
-    member = Member.select(:id).where(:league_id => @guess.league_id).where(:user_id => current_user.id).first
-    @guess.member_id = member.id
-
-    respond_to do |format|
-      if @guess.save
-        format.html { redirect_to @guess, notice: 'Guess was successfully created.' }
-        format.json { render :show, status: :created, location: @guess }
-      else
-        format.html { render :new }
-        format.json { render json: @guess.errors, status: :unprocessable_entity }
-      end
+    league_id = params[:guess][:league_id]
+    member_id = Member.where(:league_id => league_id).where(:user_id => current_user.id).pluck(:id).first
+    if member_id == nil
+      # return error
     end
+    
+    game = Game.find_by_id(params[:guess][:game_id])
+    if game.kickoff_at < DateTime.now
+      # return error
+    end
+    
+    result = params[:guess][:result]
+    
+    # check if there is already a guess
+    guess = Guess.find_or_create_by(league_id: league_id, member_id: member_id, game_id: game.id)
+    guess.result = result
+    
+    
+    if guess.save
+      render json: {status: :ok}
+    else
+      render json: {status: :unprocessable_entity}
+    end
+    
+    #@guess = Guess.new(guess_params)
+    #member = Member.select(:id).where(:league_id => @guess.league_id).where(:user_id => current_user.id).first
+    #@guess.member_id = member.id
+
+    #respond_to do |format|
+    #  if @guess.save
+    #    format.html { redirect_to @guess, notice: 'Guess was successfully created.' }
+    #    format.json { render :show, status: :created, location: @guess }
+    #  else
+    #    format.html { render :new }
+    #    format.json { render json: @guess.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /guesses/1

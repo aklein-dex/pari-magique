@@ -21,20 +21,40 @@
 <br>
 <br>
 
-<%= link_to league_tournament_guesses_path(@league, @tournament), class: "btn btn-success" do %>
-  <%= icon("book") %> Past Guesses
-<% end %>
-<br>
-<br>
+<table class="table table-striped">
+  <% @table.each_with_index do |row, row_index| %>
+    <% if row_index == 0 %>
+      <thead class="thead-inverse">
+        <tr>
+          <% row.each do |col| %>
+            <th>
+              <%= col %>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+    <% else %>
+      <tr>
+        <% row.each_with_index do |col, col_index| %>
+            <% if col_index == 0 %>
+              <th scope="row">
+                <%= col %>
+              </th>
+            <% elsif col_index == 1 %>
+              <td>
+                <%= col %>
+              </td>
+            <% else %>
+              <td>
+                <span class="badge <%= getBadgeClass(row[1], col) %>"><%= col %></span>
+              </td>
+            <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
 
-<%= render partial: 'games', locals: { past: false, games: @coming_games, title: "Next 5 coming games" } %>
-<br>
-
-
-<%= render partial: 'games', locals: { past: true, games: @last_games, title: "Past 5 games" } %>
-<br>
-
-<%= render 'ranking' %>
-
+<br><br>
 
 </div>

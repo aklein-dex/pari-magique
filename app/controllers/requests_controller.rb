@@ -24,8 +24,8 @@ class RequestsController < ApplicationController
       if @request.update(request_params)
         if Request.statuses[@request.status] == Request.statuses[:accepted]
           # let's create a member
-          # TODO it's not the username of the current_user, but the username of the guy who created the request
-          member = Member.new(:user_id => @request.user_id, :league_id =>  @request.league_id, :occupation => :player, :username => current_user.username)
+          username = User.where(id: @request.user_id).pluck(:username).first
+          member = Member.new(:user_id => @request.user_id, :league_id =>  @request.league_id, :occupation => :player, :username => username)
           member.save
 
           # and create a ranking for each tournament of the league

@@ -20,7 +20,7 @@ class Ability
         user.is_coach?(league.id)
       end
 
-      can [:read], Tournament
+      can [:read, :group, :guesses], Tournament
 
       can [:create], Guess
       can [:read, :update], Guess do |guess|

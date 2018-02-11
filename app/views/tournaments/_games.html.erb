@@ -1,9 +1,5 @@
-<% if past %>
-  <h3>Last 5 games</h3>
-<% else %>
-  <h3>Next 5 coming games</h3>
-<% end %>
 
+<h3><%= title %></h3>
 
 <table class="table vertical-align">
   <tbody>
@@ -20,38 +16,63 @@
         <br>
         <%= game.stadium.name %>
       </td>
-      <td class="flag_size_col"><%= image_tag(game.home.flag_path) %></td>
+      <td class="flag_size_col2"><%= image_tag(game.home.flag_path, size: "46x28") %></td>
       <td class="big_font"><%= game.home.name %></td>
       <td class="center">
-      <% # this is not correct!!!!!!!!!! Because it fetches all the guesses for all users, and not for the current user!!!!! 
-         if game.guesses[0] != nil 
-          temp = game.guesses[0]
-         else
-           temp = @guess
-         end
-      %>
-      <% if past %>
-        <span class="big_font"><%= game.result %></span>
-        <br>
-        <% if temp.result %>
-          <span class="badge <%= getBadgeClass(game.result, temp.result) %>"><%= temp.result %></span>
+        <% if is_past_game(game) %>
+          <span class="big_font"><%= game.result %></span>
+          <br>
+          <% if game.guess_result %>
+            <span class="badge <%= getBadgeClass(game.result, game.guess_result) %>"><%= game.guess_result %></span>
+          <% else %>
+            n/a
+          <% end %>
         <% else %>
-          n/a
+          <%= text_field_tag "guess-game-#{game.id}", game.guess_result, size: 5, 
+                "data-original-guess": "#{game.guess_result}",
+                onfocusout: "updateGuess(#{game.id})" %>
         <% end %>
-      <% else %>
-        <%= form_for temp do |form| %>
-          <%= form.hidden_field :id,        id: :id,             value: temp.id %>
-          <%= form.hidden_field :game_id,   id: :game_id,        value: game.id %>
-          <%= form.hidden_field :league_id, id: :game_league_id, value: @league.id %>
-          <%= form.text_field   :result,    id: :guess_result,   value: temp.result, size: 5 %>
-          <%= form.submit "Update", class: "btn btn-primary" %>
-        <% end %>
-      <% end %>
       </td>
-      <td class="big_font"><%= game.away.name %></td>
-      <td class="flag_size_col"><%= image_tag(game.away.flag_path) %></td>
+      <td class="big_font text-right"><%= game.away.name %></td>
+      <td class="flag_size_col"><%= image_tag(game.away.flag_path, size: "46x28") %></td>
       
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<script>
+  // update the guess using ajax
+  function updateGuess(gameId) {
+    guess    = $("#guess-game-" + gameId).val();
+    leagueId = <%= @league.id %>;
+    
+    if (guess == "") 
+      return;
+    
+    originalGuess = $("#guess-game-" + gameId).attr("data-original-guess")
+    if (guess == originalGuess)
+      return;
+    
+    $.ajax({
+      type: "POST",
+      url: "<%= guesses_path %>",
+      data: { guess: { result: guess,
+                       league_id: leagueId,
+                       game_id: gameId },
+              authenticity_token: "<%= form_authenticity_token %>"
+            },
+      success: function(data) {
+        if (data.status == "ok") {
+          $("#guess-game-" + gameId).css("background-color", "greenyellow");
+          $("#guess-game-" + gameId).attr("data-original-guess", guess);
+        } else {
+          $("#guess-game-" + gameId).css("background-color", "red");
+        }
+      },
+      error: function(data) {
+        $("#guess-game-" + gameId).css("background-color", "red");
+      }
+  });
+  }
+</script>

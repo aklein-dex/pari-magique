@@ -3,12 +3,21 @@ module ApplicationHelper
     @joined_leagues = League.for_user(current_user).includes(:tournaments)
   end
   
+  # return "active" if the user is on the page of param "league". 
+  # Useful for the left side menu.
   def is_league_active(league)
     return "active" if controller_name == 'leagues' and @league and @league.id == league.id
   end
   
+  # return "active" if the user is on the page of param "tournament".
+  # Useful for the left side menu.
   def is_tournament_active(tournament)
     return "active" if controller_name == 'tournaments' and @tournament and @tournament.id = tournament.id 
+  end
+  
+  # Check if the param "game" is past (so the user can't edit his guess).
+  def is_past_game(game)
+    DateTime.now > game.kickoff_at
   end
   
   # return: 

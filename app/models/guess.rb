@@ -8,7 +8,7 @@ class Guess < ApplicationRecord
   validates :league_id, presence: true
   validates :result,
             length: { maximum: 5 },
-            format: { with: /[\d]?[\d]-[\d]?[\d]/i }
+            format: { with: /\A[\d]?[\d]-[\d]?[\d]\z/i }
 
 
   # Return TRUE if the guess and the gameResult match

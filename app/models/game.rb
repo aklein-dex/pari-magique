@@ -20,11 +20,12 @@ class Game < ApplicationRecord
   validates :stadium_id, presence: true
 
   enum stage: [:one, :two, :three]
-  enum round: [:round1, :round2, :round3, :round4, :round16, :quarter, :semi, :finale3, :finale]
+  enum round: [:round1, :round2, :round3, :round4, :round16, :quarter, :semi, :finale]
   enum group: [:A, :B, :C, :D, :E, :F, :G, :H]
 
   scope :next_5_games, -> { where("kickoff_at > ?", Time.now).order(:kickoff_at).limit(5)}
-  scope :last_5_games, -> { where("kickoff_at < ?", Time.now).order(kickoff_at:  :desc).limit(5)}
+  scope :last_5_games, -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc).limit(5)}
+  scope :past_games,   -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc)}
   
   # Import all the games in the file
   def self.import(file, tournament_id)

@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   resources :requests
 
   resources :leagues do
-    resources :tournaments
+    resources :tournaments do
+      get 'group/:group_id', to: 'tournaments#group', as: 'group'
+      get 'round/:round_id', to: 'tournaments#round', as: 'round'
+      get 'guesses', to: 'tournaments#guesses', as: 'guesses'
+    end
   end
   
   namespace :admin do
