@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get 'group/:group_id', to: 'tournaments#group', as: 'group'
       get 'round/:round_id', to: 'tournaments#round', as: 'round'
       get 'guesses', to: 'tournaments#guesses', as: 'guesses'
+      get 'ranking', to: 'tournaments#ranking', as: 'ranking'
     end
   end
   

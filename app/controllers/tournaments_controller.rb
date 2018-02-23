@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament_and_league, only: [:show, :group, :guesses]
+  before_action :set_tournament_and_league, only: [:show, :group, :guesses, :ranking]
   load_and_authorize_resource
 
   # Main page to show an overview of the tournament
@@ -7,7 +7,7 @@ class TournamentsController < ApplicationController
     @coming_games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).next_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}")
     @last_games   = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).last_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}")
     @guess        = Guess.new(:league => @league)
-    @rankings     = []#Ranking.where(:league_id => @league.id, :tournament_id => @tournament.id)
+    @rankings     = Ranking.where(:league_id => @league.id, :tournament_id => @tournament.id)
   end
 
   # Show the games for a specific group
@@ -66,7 +66,10 @@ class TournamentsController < ApplicationController
       end
       row+=1
     end
-    
+  end
+  
+  def ranking
+    # todo
   end
 
   private

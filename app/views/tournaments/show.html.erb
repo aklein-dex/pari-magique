@@ -27,11 +27,11 @@
 <br>
 <br>
 
-<%= render partial: 'games', locals: { past: false, games: @coming_games, title: "Next 5 coming games" } %>
+<%= render partial: 'games', locals: { games: @coming_games, title: "Next 5 coming games" } %>
 <br>
 
 
-<%= render partial: 'games', locals: { past: true, games: @last_games, title: "Past 5 games" } %>
+<%= render partial: 'games', locals: { games: @last_games, title: "Past 5 games" } %>
 <br>
 
 <%= render 'ranking' %>

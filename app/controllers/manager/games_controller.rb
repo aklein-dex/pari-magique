@@ -51,36 +51,13 @@ class Manager::GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-
     respond_to do |format|
-      if @game.update(game_params)
-
-        # TODO: what happen if we edit a result? -> have to recalculate all the rankings for the tournament in all the leagues!
-
-        if @game.result != nil
-          # Update the rankings
-          guesses = Guess.where(:game_id => @game.id)
-          guesses.each do |guess|
-            ranking = Ranking.where(:member_id => guess.member_id, :tournament_id => @game.tournament_id, :league_id => guess.league_id).first
-
-            if guess.is_perfect_guess?(@game.result)
-              ranking.point3 = ranking.point3 + 1;
-              # could use:
-              #   Ranking.where(:member_id => guess.member_id, :tournament_id => @game.tournament_id, :league_id => guess.league_id).first.increment!(:point3)
-            elsif guess.is_good_guess?(@game.result)
-              ranking.point1 = ranking.point1 + 1;
-            else
-              ranking.point0 = ranking.point0 + 1;
-            end
-            ranking.save
-          end
-        end
-
+      if @game.update(game_params) # this triggers after_update callback
         format.html { redirect_to [:manager, @game], notice: 'Game was successfully updated.' }
-        format.json { render :show, status: :ok, location: @game }
+        format.json { render json: {msg: "ok"}, status: :ok }
       else
         format.html { render :edit }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.json { render json: {msg: "ko"}, status: :unprocessable_entity }
       end
     end
   end

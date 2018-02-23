@@ -2,6 +2,7 @@
 <div class="container">
 <h1>Games</h1>
 
+<% if false %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -45,6 +46,8 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
+<%= render partial: 'games', locals: { games: @games, title: "Games" } %>
 
 <br>
 

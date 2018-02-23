@@ -1,0 +1,81 @@
+
+<h3><%= title %></h3>
+
+<table class="table vertical-align">
+  <tbody>
+    
+  <% games.each do |game| %>
+    <tr>
+      <td>
+        <%= game.kickoff_at %>
+        <br>
+        <% if game.group != nil %>
+          Group <%= game.group %>,
+        <% end %>
+        <%= game.round %>
+        <br>
+        <%= game.stadium.name %>
+      </td>
+      <td class="flag_size_col2"><%= image_tag(game.home.flag_path, size: "46x28") %></td>
+      <td class="big_font"><%= game.home.name %></td>
+      <td class="center">
+        <% if not game.result.empty? %>
+          <span class="big_font"><%= game.result %></span>
+        <% else %>
+          <%= text_field_tag "game-#{game.id}", game.result, size: 5,
+                "data-original-result": "#{game.result}",
+                onfocusout: "updateResult(#{game.id})" %>
+        <% end %>
+      </td>
+      <td class="big_font text-right"><%= game.away.name %></td>
+      <td class="flag_size_col"><%= image_tag(game.away.flag_path, size: "46x28") %></td>
+      <td>
+        <%= link_to [:manager, game], class: "action_button" do %>
+          <i class="fa fa-info-circle"></i>
+        <% end %>
+        <%= link_to edit_manager_game_path(game), class: "action_button" do %>
+          <i class="fa fa-pencil-square-o"></i>
+        <% end %>
+        <%= link_to [:manager, game], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-times"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+  // update the result using ajax
+  function updateResult(gameId) {
+    result = $("#game-" + gameId).val();
+    
+    if (result == "") 
+      return;
+    
+    originalResult = $("#game-" + gameId).attr("data-original-result")
+    if (result == originalResult)
+      return;
+    
+    $.ajax({
+      type: "POST",
+      url: "<%= manager_games_path %>/" + gameId + ".json",
+      data: { game: { result: result },
+              _method:'put',
+              remote: true,
+              authenticity_token: "<%= form_authenticity_token %>"
+            },
+      success: function(data) {
+        if (data.msg == "ok") {
+          $("#game-" + gameId).css("background-color", "greenyellow");
+          $("#game-" + gameId).attr("data-original-result", result);
+        } else {
+          $("#game-" + gameId).css("background-color", "red");
+        }
+      },
+      error: function(data) {
+        $("#game-" + gameId).css("background-color", "red");
+      }
+  });
+  }
+</script>

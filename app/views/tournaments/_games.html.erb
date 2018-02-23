@@ -63,7 +63,7 @@
               authenticity_token: "<%= form_authenticity_token %>"
             },
       success: function(data) {
-        if (data.status == "ok") {
+        if (data.msg == "ok") {
           $("#guess-game-" + gameId).css("background-color", "greenyellow");
           $("#guess-game-" + gameId).attr("data-original-guess", guess);
         } else {

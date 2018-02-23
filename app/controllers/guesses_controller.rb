@@ -44,9 +44,10 @@ class GuessesController < ApplicationController
     
     
     if guess.save
-      render json: {status: :ok}
+      render json: {msg: "ok"}, status: :ok
     else
-      render json: {status: :unprocessable_entity}
+      # todo msg could contain the error message
+      render json: {msg: "ko"}, status: :unprocessable_entity
     end
     
     #@guess = Guess.new(guess_params)

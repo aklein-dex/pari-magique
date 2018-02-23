@@ -27,6 +27,9 @@ class Game < ApplicationRecord
   scope :last_5_games, -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc).limit(5)}
   scope :past_games,   -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc)}
   
+  after_validation :edit_result_past_games_only
+  after_update :update_rankings, if: :saved_change_to_result?
+  
   # Import all the games in the file
   def self.import(file, tournament_id)
     stadiums = {}
@@ -69,4 +72,23 @@ class Game < ApplicationRecord
       Game.create!(:tournament_id => tournament_id, :round => round, :kickoff_at => kickoff, :stadium_id => stadium_id, :home_id => home_id, :away_id => away_id, :group => group)
     end
   end
+  
+  private
+  
+    # When the result of a game is updated we need to update the ranking
+    def update_rankings
+      if self.result_before_last_save.blank? and self.result.present?
+        # A new result for the game was saved, so we update the rankings
+        Ranking.update_rankings(self)
+      elsif self.result_before_last_save.present? and self.result_before_last_save != self.result
+        # The result of the game was updated
+        Ranking.update_rankings(self, true)
+      else
+        # no need to update the ranking
+      end
+    end
+    
+    def edit_result_past_games_only
+      # todo we should be able to edit the result only if now > kickoff_at 
+    end
 end

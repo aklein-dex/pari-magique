@@ -20,16 +20,16 @@ class Ability
         user.is_coach?(league.id)
       end
 
-      can [:read, :group, :guesses], Tournament
+      can [:read, :group, :guesses, :ranking], Tournament
 
-      can [:create], Guess
+      # todo -> below is probably not necesary
       can [:read, :update], Guess do |guess|
         user.id == guess.member.user_id
       end
     end
 
     if user.role? :manager
-
+      can [:create], Guess
     end
 
     if user.role? :admin
