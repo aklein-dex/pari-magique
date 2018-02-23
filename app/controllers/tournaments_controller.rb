@@ -55,7 +55,8 @@ class TournamentsController < ApplicationController
     row = 1
     games.each do |game|
       @table << []
-      @table[row] << "#{game.home.name} vs #{game.away.name}"
+      #@table[row] << "#{game.home.name} vs #{game.away.name}"
+      @table[row] << game
       @table[row] << game.result
       members.each do |member|
         if hashed_guesses.has_key?(member.id) and hashed_guesses[member.id].has_key?(game.id)

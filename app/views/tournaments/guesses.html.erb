@@ -4,20 +4,8 @@
 
 <h1><%= @tournament.name %>, <%= @tournament.location %></h1>
 
-<div class="btn-group" role="group" aria-label="Basic example">
-  <%= link_to 'Group A', league_tournament_group_path(@league, @tournament, "A"), class: "btn btn-secondary" %>
-  <%= link_to 'Group B', league_tournament_group_path(@league, @tournament, "B"), class: "btn btn-secondary" %>
-  <%= link_to 'Group C', league_tournament_group_path(@league, @tournament, "C"), class: "btn btn-secondary" %>
-  <%= link_to 'Group D', league_tournament_group_path(@league, @tournament, "D"), class: "btn btn-secondary" %>
-  <%= link_to 'Group E', league_tournament_group_path(@league, @tournament, "E"), class: "btn btn-secondary" %>
-  <%= link_to 'Group F', league_tournament_group_path(@league, @tournament, "F"), class: "btn btn-secondary" %>
-  <%= link_to 'Group G', league_tournament_group_path(@league, @tournament, "G"), class: "btn btn-secondary" %>
-  <%= link_to 'Group H', league_tournament_group_path(@league, @tournament, "H"), class: "btn btn-secondary" %>
-  <button type="button" class="btn btn-secondary">Round of 16</button>
-  <button type="button" class="btn btn-secondary">Quarter-finals</button>
-  <button type="button" class="btn btn-secondary">Semi-finals</button>
-  <button type="button" class="btn btn-secondary">Finale</button>
-</div>
+<%= render 'buttons' %>
+
 <br>
 <br>
 
@@ -26,8 +14,12 @@
     <% if row_index == 0 %>
       <thead class="thead-inverse">
         <tr>
-          <% row.each do |col| %>
-            <th>
+          <% row.each_with_index do |col, col_index| %>
+            <% if col_index == 0 %>
+              <th colspan="4">
+            <% else %>
+              <th>
+            <% end %>
               <%= col %>
             </th>
           <% end %>
@@ -36,19 +28,20 @@
     <% else %>
       <tr>
         <% row.each_with_index do |col, col_index| %>
-            <% if col_index == 0 %>
-              <th scope="row">
-                <%= col %>
-              </th>
-            <% elsif col_index == 1 %>
-              <td class="big_font">
-                <%= col %>
-              </td>
-            <% else %>
-              <td class="big_font">
-                <span class="badge <%= getBadgeClass(row[1], col) %>"><%= col %></span>
-              </td>
-            <% end %>
+          <% if col_index == 0 %>
+            <th scope="row" class="big_font text-right"><%= col.home.name %></th>
+            <th scope="row" class="flag_size_col"><%= image_tag(col.home.flag_path, size: "46x28") %></th>
+            <th scope="row" class="flag_size_col"><%= image_tag(col.away.flag_path, size: "46x28") %></th>
+            <th scope="row" class="big_font"><%= col.away.name %></th>
+          <% elsif col_index == 1 %>
+            <td class="big_font">
+              <%= col %>
+            </td>
+          <% else %>
+            <td class="big_font">
+              <span class="badge <%= getBadgeClass(row[1], col) %>"><%= col %></span>
+            </td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
