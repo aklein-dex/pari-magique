@@ -1,8 +1,25 @@
 <h3>Ranking</h3>
-<ul>
-  <% @rankings.each do |rank| %>
-    <li>
-      <%= rank.member.username %> | <%= rank.point3 %> | <%= rank.point1 %> | <%= rank.point0 %>
-    </li>
-  <% end %>
-</ul>
+<table class="table table-striped">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>3 points</th>
+      <th>1 point</th>
+      <th>0 point</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rankings.each do |rank| %>
+      <tr>
+        <td><!-- # todo add position --></td>
+        <td><%= rank.member.username %></td>
+        <td><%= rank.point3 %></td>
+        <td><%= rank.point1 %></td>
+        <td><%= rank.point0 %></td>
+        <td><%= rank.points %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
