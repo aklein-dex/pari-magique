@@ -3,6 +3,10 @@
 
 <h1><%= @tournament.name %>, <%= @tournament.location %></h1>
 
+<%= render 'buttons' %>
+
+<br>
+<br>
 
 <%= render partial: 'games', locals: { past: false, games: @games, title: "Group #{params[:group_id]}" } %>
 <br>
