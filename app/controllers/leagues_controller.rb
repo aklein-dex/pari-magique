@@ -6,6 +6,8 @@ class LeaguesController < ApplicationController
   # GET /leagues/1
   # GET /leagues/1.json
   def show
+    @chat_room = ChatRoom.includes(:messages).find_by(league_id: @league.id)
+    @message   = Message.new
   end
 
   # GET /leagues/new
@@ -24,8 +26,11 @@ class LeaguesController < ApplicationController
     begin
       League.transaction do
         @league.save!
-        member = Member.new(:user_id => current_user.id, :league_id =>  @league.id, :occupation => :coach, :username => current_user.username)
+        member = Member.new(:user_id => current_user.id, :league_id => @league.id, :occupation => :coach, :username => current_user.username)
         member.save!
+        
+        chat_room = ChatRoom.new(:league_id => @league.id, :title => @league.name)
+        chat_room.save!
 
         redirect_to @league, notice: 'League was successfully created.'
         return

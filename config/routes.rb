@@ -41,4 +41,6 @@ Rails.application.routes.draw do
       collection { post :import }
     end
   end
+  
+  mount ActionCable.server => '/cable'
 end

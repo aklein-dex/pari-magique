@@ -9,6 +9,28 @@
   <% end %>
 </h1>
 
+
+<div class="container">
+  <ul id="messages" data-chat-room-id="<%= @chat_room.id %>" class="list-group">
+    <%= render @chat_room.messages %>
+  </ul>
+
+  <br>
+  
+  <%= form_for @message, url: '#' do |f| %>
+    <div class="form-group">
+      Enter your message:
+      <%= f.text_area :body, class: 'form-control' %>
+      <small class="text-muted">Max 1000 characters</small>
+    </div>
+
+    <%= f.submit "Post", class: 'btn btn-primary' %>
+  <% end %>
+
+</div>
+
+<br><br>
+
 <div class="container marketing">
 
   <div class="row">

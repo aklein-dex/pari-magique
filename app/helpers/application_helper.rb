@@ -59,4 +59,5 @@ module ApplicationHelper
       "badge-default"
     end
   end
+  
 end

@@ -6,6 +6,8 @@ class League < ApplicationRecord
   has_many :requests
   has_many :rankings
 
+  has_many :chat_rooms, dependent: :destroy
+  
   validates :name,
             length: { maximum: 20 },
             presence: true

@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   has_many :members
   has_many :leagues, :through => :members
+  
+  has_many :messages, dependent: :destroy
 
   def member_id_for_league(league_id)
     Member.where(:league_id => league_id).where(:user_id => id).first.id

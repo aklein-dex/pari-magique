@@ -38,6 +38,10 @@ TODO
 bundle install --without production
 ```
 
+#### Redis
+
+Please follow this tutorial to install Redis: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04
+
 ### Tests
 
 How to run the test suite. TODO
