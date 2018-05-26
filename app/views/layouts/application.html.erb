@@ -4,6 +4,8 @@
     <title><%= yield(:title) %> | Pari-magique</title>
     <%= csrf_meta_tags %>
 
+    <!-- Add Tether otherwise there is the following error: Bootstrap tooltips require Tether  -->
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!--[if lt IE 9]>
@@ -24,7 +26,7 @@
          <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             <p class="notice"><%= notice %></p>
             <p class="alert"><%= alert %></p>
-       
+
             <%= yield %>
             <%= debug(params) if Rails.env.development? %>
         </div>
