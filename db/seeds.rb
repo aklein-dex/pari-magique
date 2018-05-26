@@ -12,7 +12,8 @@ user = User.new(
     :role                  => :admin,
     :email                 => "admin@pm.com",
     :password              => "123456",
-    :password_confirmation => "123456"
+    :password_confirmation => "123456",
+    :time_zone             => "UTC"
 )
 user.save!
 
@@ -22,7 +23,8 @@ user = User.new(
     :role                  => :manager,
     :email                 => "manager@pm.com",
     :password              => "123456",
-    :password_confirmation => "123456"
+    :password_confirmation => "123456",
+    :time_zone             => "UTC"
 )
 user.save!
 
@@ -31,7 +33,8 @@ user = User.new(
     :role                  => :member,
     :email                 => "user1@pm.com",
     :password              => "123456",
-    :password_confirmation => "123456"
+    :password_confirmation => "123456",
+    :time_zone             => "UTC"
 )
 user.save!
 
@@ -40,7 +43,8 @@ user = User.new(
     :role                  => :member,
     :email                 => "user2@pm.com",
     :password              => "123456",
-    :password_confirmation => "123456"
+    :password_confirmation => "123456",
+    :time_zone             => "UTC"
 )
 user.save!
 

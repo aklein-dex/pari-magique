@@ -3,11 +3,11 @@
 
 <table class="table vertical-align">
   <tbody>
-    
+
   <% games.each do |game| %>
     <tr>
       <td>
-        <%= game.kickoff_at %>
+        <%= game.kickoff_at_format %>
         <br>
         <% if game.group != nil %>
           Group <%= game.group %>,
@@ -28,14 +28,14 @@
             n/a
           <% end %>
         <% else %>
-          <%= text_field_tag "guess-game-#{game.id}", game.guess_result, size: 5, 
+          <%= text_field_tag "guess-game-#{game.id}", game.guess_result, size: 5,
                 "data-original-guess": "#{game.guess_result}",
                 onfocusout: "updateGuess(#{game.id})" %>
         <% end %>
       </td>
       <td class="big_font text-right"><%= game.away.name %></td>
       <td class="flag_size_col"><%= image_tag(game.away.flag_path, size: "46x28") %></td>
-      
+
     </tr>
   <% end %>
   </tbody>
@@ -46,14 +46,14 @@
   function updateGuess(gameId) {
     guess    = $("#guess-game-" + gameId).val();
     leagueId = <%= @league.id %>;
-    
-    if (guess == "") 
+
+    if (guess == "")
       return;
-    
+
     originalGuess = $("#guess-game-" + gameId).attr("data-original-guess")
     if (guess == originalGuess)
       return;
-    
+
     $.ajax({
       type: "POST",
       url: "<%= guesses_path %>",

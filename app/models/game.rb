@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
   require 'csv'
-  
+
   belongs_to :tournament
   belongs_to :stadium
   belongs_to :home, class_name: "Team"
@@ -26,21 +26,25 @@ class Game < ApplicationRecord
   scope :next_5_games, -> { where("kickoff_at > ?", Time.now).order(:kickoff_at).limit(5)}
   scope :last_5_games, -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc).limit(5)}
   scope :past_games,   -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc)}
-  
+
   after_validation :edit_result_past_games_only
   after_update :update_rankings, if: :saved_change_to_result?
-  
+
+  def kickoff_at_format(format = "%d %b, %H:%M")
+    kickoff_at.strftime(format)
+  end
+
   # Import all the games in the file
   def self.import(file, tournament_id)
     stadiums = {}
     teams = {}
-    
+
     CSV.foreach(file.path, headers: true) do |row|
       round = row['Round'].to_i - 1
-      
+
       # should be in UTC
       kickoff = row['Date'].to_datetime
-      
+
       stadium = row['Location']
       if not stadiums.has_key?(stadium)
         stadium_ids = Stadium.where(name: stadium).pluck(:id)
@@ -48,7 +52,7 @@ class Game < ApplicationRecord
         stadiums[stadium] = stadium_ids[0]
       end
       stadium_id = stadiums[stadium]
-      
+
       home = row['Home Team']
       if not teams.has_key?(home)
         team_ids = Team.where(name: home).pluck(:id)
@@ -56,7 +60,7 @@ class Game < ApplicationRecord
         teams[home] = team_ids[0]
       end
       home_id = teams[home]
-      
+
       away = row['Away Team']
       if not teams.has_key?(away)
         team_ids = Team.where(name: away).pluck(:id)
@@ -64,17 +68,17 @@ class Game < ApplicationRecord
         teams[away] = team_ids[0]
       end
       away_id = teams[away]
-      
+
       group = row['Group'][-1]
       stage = "one"
-      
+
       # todo handle exceptions
       Game.create!(:tournament_id => tournament_id, :round => round, :kickoff_at => kickoff, :stadium_id => stadium_id, :home_id => home_id, :away_id => away_id, :group => group)
     end
   end
-  
+
   private
-  
+
     # When the result of a game is updated we need to update the ranking
     def update_rankings
       if self.result_before_last_save.blank? and self.result.present?
@@ -87,8 +91,8 @@ class Game < ApplicationRecord
         # no need to update the ranking
       end
     end
-    
+
     def edit_result_past_games_only
-      # todo we should be able to edit the result only if now > kickoff_at 
+      # todo we should be able to edit the result only if now > kickoff_at
     end
 end

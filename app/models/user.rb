@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-         
+
   enum role: [:member, :manager, :admin]
 
   validates :username,
@@ -11,10 +11,12 @@ class User < ApplicationRecord
             :uniqueness => {
                 :case_sensitive => false
             }
+  validates :time_zone,
+            :presence => true
 
   has_many :members
   has_many :leagues, :through => :members
-  
+
   has_many :messages, dependent: :destroy
 
   def member_id_for_league(league_id)
