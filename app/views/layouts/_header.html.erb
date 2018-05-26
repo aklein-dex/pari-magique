@@ -3,7 +3,7 @@
   <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+
       <%= link_to "Pari-magique", root_path, id: "logo", class: "navbar-brand" %>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -27,15 +27,16 @@
             </li>
           <% end %>
         </ul>
-        
-        <ul class="navbar-nav justify-content-end">
+
+        <ul class="navbar-nav">
           <% if user_signed_in? %>
-            <li class="dropdown nav-item">
+            <li class="dropdown nav-item" style="margin-right: 50px;">
               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><%= icon('user-circle')%> <%= current_user.username %> <b class="caret"></b></a>
               <div class="dropdown-menu">
                 <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
                   <%= icon('cog')%> Profile
                 <% end %>
+                <div class="dropdown-divider"></div>
                 <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
                   <%= icon('sign-out')%> Log out
                 <% end %>
