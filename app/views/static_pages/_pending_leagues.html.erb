@@ -1,0 +1,10 @@
+
+<% if @pending_leagues.size > 0 %>
+<div id="pending_leagues">
+  Leagues waiting for answer:
+  <br>
+  <% @pending_leagues.each do |league| %>
+      <%= link_to league.name, league %>
+  <% end %>
+</div>
+<% end %>
