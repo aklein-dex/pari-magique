@@ -1,0 +1,19 @@
+<div id="possible_leagues">
+
+<% if @possible_leagues.size > 0 %>
+  Join an existing league:
+  <br>
+  <ul>
+  <% @possible_leagues.each do |league| %>
+      <li>
+        <%= form_for @request  do |form| %>
+          <%= form.hidden_field :league_id, id: :league_id, value: league.id %>
+          <%= link_to league.name, league %> <%= form.submit "Send request", class: "btn btn-primary" %>
+        <% end %>
+      </li>
+  <% end %>
+  </ul>
+<% else %>
+  No new league to join for now.
+<% end %>
+</div>

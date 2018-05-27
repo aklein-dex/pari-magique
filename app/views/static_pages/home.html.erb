@@ -1,29 +1,18 @@
 <% provide(:title, "Home") %>
+<div class="container">
+
 <h1>Pari-magique</h1>
 
+<p>
+  Welcome! This website is still a work in progress. Don't be surprised if some pages are ugly.
+  If you have suggestions or see a bug, please send me an email.
+</p>
 
-<div id="pending_leagues">
-  Leagues waiting for answer:
-  <br>
-  <% @pending_leagues.each do |league| %>
-      <%= link_to league.name, league %>
-  <% end %>
-</div>
+<p>Make sure to join a league below!</p>
 
-<div id="possible_leagues">
+<%= render "pending_leagues" %>
 
-<% if @possible_leagues.size > 0 %>
-  Join an existing league:
-  <br>
-  <ul>
-  <% @possible_leagues.each do |league| %>
-      <li>
-        <%= form_for @request  do |form| %>
-          <%= form.hidden_field :league_id, id: :league_id, value: league.id %>
-          <%= link_to league.name, league %> <%= form.submit "Send request", class: "btn btn-primary" %>
-        <% end %>
-      </li>
-  <% end %>
-  </ul>
-  <% end %>
+<%= render "possible_leagues" %>
+
+
 </div>

@@ -52,19 +52,6 @@ class GuessesController < ApplicationController
       render json: {msg: "ko"}, status: :unprocessable_entity
     end
 
-    #@guess = Guess.new(guess_params)
-    #member = Member.select(:id).where(:league_id => @guess.league_id).where(:user_id => current_user.id).first
-    #@guess.member_id = member.id
-
-    #respond_to do |format|
-    #  if @guess.save
-    #    format.html { redirect_to @guess, notice: 'Guess was successfully created.' }
-    #    format.json { render :show, status: :created, location: @guess }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @guess.errors, status: :unprocessable_entity }
-    #  end
-    #end
   end
 
   # PATCH/PUT /guesses/1

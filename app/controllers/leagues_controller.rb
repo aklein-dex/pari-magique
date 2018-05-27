@@ -2,6 +2,11 @@ class LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  # GET /games
+  # GET /games.json
+  def index
+    @leagues = League.all
+  end
 
   # GET /leagues/1
   # GET /leagues/1.json
@@ -28,7 +33,7 @@ class LeaguesController < ApplicationController
         @league.save!
         member = Member.new(:user_id => current_user.id, :league_id => @league.id, :occupation => :coach, :username => current_user.username)
         member.save!
-        
+
         chat_room = ChatRoom.new(:league_id => @league.id, :title => @league.name)
         chat_room.save!
 
