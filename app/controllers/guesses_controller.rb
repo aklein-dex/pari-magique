@@ -28,28 +28,30 @@ class GuessesController < ApplicationController
     league_id = params[:guess][:league_id]
     member_id = Member.where(:league_id => league_id).where(:user_id => current_user.id).pluck(:id).first
     if member_id == nil
-      # return error
+      render json: {msg: "ko"}, status: :unprocessable_entity
+      return
     end
-    
+
     game = Game.find_by_id(params[:guess][:game_id])
     if game.kickoff_at < DateTime.now
-      # return error
+      render json: {msg: "ko"}, status: :unprocessable_entity
+      return
     end
-    
+
     result = params[:guess][:result]
-    
+
     # check if there is already a guess
     guess = Guess.find_or_create_by(league_id: league_id, member_id: member_id, game_id: game.id)
     guess.result = result
-    
-    
+
+
     if guess.save
       render json: {msg: "ok"}, status: :ok
     else
       # todo msg could contain the error message
       render json: {msg: "ko"}, status: :unprocessable_entity
     end
-    
+
     #@guess = Guess.new(guess_params)
     #member = Member.select(:id).where(:league_id => @guess.league_id).where(:user_id => current_user.id).first
     #@guess.member_id = member.id
