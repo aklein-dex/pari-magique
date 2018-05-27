@@ -1,6 +1,6 @@
-class CreateLeagues < ActiveRecord::Migration[5.1]
+class CreateFactions < ActiveRecord::Migration[5.1]
   def change
-    create_table :leagues do |t|
+    create_table :factions do |t|
       t.string :name, null: false, index: true, limit: 5
 
       t.timestamps

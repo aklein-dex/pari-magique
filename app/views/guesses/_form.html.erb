@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :member_id %>
-    <%= form.collection_select(:member_id, Member.includes(:user).where(:league_id => @league_id), :id, :id, class: 'form-control') %>
+    <%= form.collection_select(:member_id, Member.includes(:user).where(:faction_id => @faction_id), :id, :id, class: 'form-control') %>
   </div>
 
   <div class="field">

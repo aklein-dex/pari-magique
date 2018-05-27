@@ -2,22 +2,22 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    
+
     user ||= User.new # guest user (not logged in)
 
     if user.role? :member
       can [:create], Request
       can [:update], Request do |request|
-        user.is_coach?(request.league.id)
+        user.is_coach?(request.faction.id)
       end
 
-      can [:create], League
-      can [:read], League do |league|
-        user.is_player?(league.id)
+      can [:create], Faction
+      can [:read], Faction do |faction|
+        user.is_player?(faction.id)
       end
-      
-      can [:update, :destroy], League do |league|
-        user.is_coach?(league.id)
+
+      can [:update, :destroy], Faction do |faction|
+        user.is_coach?(faction.id)
       end
 
       can [:read, :group, :guesses, :ranking], Tournament

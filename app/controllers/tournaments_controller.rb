@@ -1,57 +1,57 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament_and_league, only: [:show, :group, :guesses, :ranking]
+  before_action :set_tournament_and_faction, only: [:show, :group, :guesses, :ranking]
   load_and_authorize_resource
 
   # Main page to show an overview of the tournament
   def show
-    @coming_games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).next_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}")
-    @last_games   = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).last_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}")
-    @guess        = Guess.new(:league => @league)
-    @rankings     = Ranking.where(:league_id => @league.id, :tournament_id => @tournament.id)
+    @coming_games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).next_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}")
+    @last_games   = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).last_5_games.joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}")
+    @guess        = Guess.new(:faction => @faction)
+    @rankings     = Ranking.where(:faction_id => @faction.id, :tournament_id => @tournament.id)
   end
 
   # Show the games for a specific group
   def group
-    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}").where(group: params[:group_id])
-    @guess = Guess.new(:league => @league)
+    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}").where(group: params[:group_id])
+    @guess = Guess.new(:faction => @faction)
   end
-  
+
   # Show the games for a specific round
   def round
-    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_league(@league.id)} and guesses.league_id = #{@league.id}").where(round: params[:round_id])
-    @guess = Guess.new(:league => @league)
+    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}").where(round: params[:round_id])
+    @guess = Guess.new(:faction => @faction)
   end
-  
+
   # Show the guesses of everyone (only for past games)
   def guesses
-    # Get all the past games 
+    # Get all the past games
     games = @tournament.games.includes(:home, :away, :stadium).past_games
-    
+
     # Get the guesses
-    guesses =  Guess.where(:league_id => @league.id, :game_id => games).pluck(:member_id, :game_id, :result)
+    guesses =  Guess.where(:faction_id => @faction.id, :game_id => games).pluck(:member_id, :game_id, :result)
     # hash the guesses to find stuff faster
     hashed_guesses = {}
     guesses.each do |guess|
       if not hashed_guesses.has_key?(guess[0])
         hashed_guesses[guess[0]] = {}
       end
-      
+
       hashed_guesses[guess[0]][guess[1]] = guess[2]
     end
-    
-    
-    members = Member.where(:league_id => @league.id)
-    
-    # This will contain the the rows and columns displayed in the view 
+
+
+    members = Member.where(:faction_id => @faction.id)
+
+    # This will contain the the rows and columns displayed in the view
     @table = [[]]
-    
+
     # The first row is the usernames
     @table[0] << ""
     @table[0] << "Result"
     members.each do |member|
       @table[0] << member.username
     end
-    
+
     row = 1
     games.each do |game|
       @table << []
@@ -68,20 +68,20 @@ class TournamentsController < ApplicationController
       row+=1
     end
   end
-  
+
   def ranking
     # todo
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_tournament_and_league
-    
+  def set_tournament_and_faction
+
     # if you look at the routes for "group", you will see that it is tournament_id,
     # but the routes for "show", it is just "id".
     tournament_id = params[:id] ? params[:id] : params[:tournament_id]
-    
+
     @tournament = Tournament.find(tournament_id)
-    @league     = League.find(params[:league_id])
+    @faction    = Faction.find(params[:faction_id])
   end
 end

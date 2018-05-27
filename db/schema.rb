@@ -14,10 +14,24 @@ ActiveRecord::Schema.define(version: 20180227015403) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.string "title"
-    t.integer "league_id"
+    t.integer "faction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["league_id"], name: "index_chat_rooms_on_league_id"
+    t.index ["faction_id"], name: "index_chat_rooms_on_faction_id"
+  end
+
+  create_table "factions", force: :cascade do |t|
+    t.string "name", limit: 5, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_factions_on_name"
+  end
+
+  create_table "factions_tournaments", id: false, force: :cascade do |t|
+    t.integer "tournament_id", null: false
+    t.integer "faction_id", null: false
+    t.index ["faction_id"], name: "index_factions_tournaments_on_faction_id"
+    t.index ["tournament_id"], name: "index_factions_tournaments_on_tournament_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -41,37 +55,23 @@ ActiveRecord::Schema.define(version: 20180227015403) do
   create_table "guesses", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "game_id", null: false
-    t.integer "league_id", null: false
+    t.integer "faction_id", null: false
     t.string "result", limit: 5, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["faction_id"], name: "index_guesses_on_faction_id"
     t.index ["game_id"], name: "index_guesses_on_game_id"
-    t.index ["league_id"], name: "index_guesses_on_league_id"
     t.index ["member_id"], name: "index_guesses_on_member_id"
   end
 
-  create_table "leagues", force: :cascade do |t|
-    t.string "name", limit: 5, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_leagues_on_name"
-  end
-
-  create_table "leagues_tournaments", id: false, force: :cascade do |t|
-    t.integer "tournament_id", null: false
-    t.integer "league_id", null: false
-    t.index ["league_id"], name: "index_leagues_tournaments_on_league_id"
-    t.index ["tournament_id"], name: "index_leagues_tournaments_on_tournament_id"
-  end
-
   create_table "members", force: :cascade do |t|
-    t.integer "league_id", null: false
+    t.integer "faction_id", null: false
     t.integer "user_id", null: false
     t.integer "occupation", default: 0, null: false
     t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["league_id"], name: "index_members_on_league_id"
+    t.index ["faction_id"], name: "index_members_on_faction_id"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20180227015403) do
   end
 
   create_table "rankings", force: :cascade do |t|
-    t.integer "league_id", null: false
+    t.integer "faction_id", null: false
     t.integer "tournament_id", null: false
     t.integer "member_id", null: false
     t.integer "point3", default: 0, null: false
@@ -94,19 +94,19 @@ ActiveRecord::Schema.define(version: 20180227015403) do
     t.integer "point0", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["league_id"], name: "index_rankings_on_league_id"
+    t.index ["faction_id"], name: "index_rankings_on_faction_id"
     t.index ["member_id"], name: "index_rankings_on_member_id"
     t.index ["tournament_id"], name: "index_rankings_on_tournament_id"
   end
 
   create_table "requests", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "league_id", null: false
+    t.integer "faction_id", null: false
     t.datetime "accepted_at"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["league_id"], name: "index_requests_on_league_id"
+    t.index ["faction_id"], name: "index_requests_on_faction_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 

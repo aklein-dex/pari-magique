@@ -1,4 +1,4 @@
-class factionsController < ApplicationController
+class FactionsController < ApplicationController
   before_action :set_faction, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 

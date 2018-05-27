@@ -25,8 +25,8 @@ class GuessesController < ApplicationController
   # POST /guesses
   # POST /guesses.json
   def create
-    league_id = params[:guess][:league_id]
-    member_id = Member.where(:league_id => league_id).where(:user_id => current_user.id).pluck(:id).first
+    faction_id = params[:guess][:faction_id]
+    member_id = Member.where(:faction_id => faction_id).where(:user_id => current_user.id).pluck(:id).first
     if member_id == nil
       render json: {msg: "ko"}, status: :unprocessable_entity
       return
@@ -41,7 +41,7 @@ class GuessesController < ApplicationController
     result = params[:guess][:result]
 
     # check if there is already a guess
-    guess = Guess.find_or_create_by(league_id: league_id, member_id: member_id, game_id: game.id)
+    guess = Guess.find_or_create_by(faction_id: faction_id, member_id: member_id, game_id: game.id)
     guess.result = result
 
 
@@ -86,6 +86,6 @@ class GuessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def guess_params
-      params.require(:guess).permit(:member_id, :game_id, :league_id, :result)
+      params.require(:guess).permit(:member_id, :game_id, :faction_id, :result)
     end
 end

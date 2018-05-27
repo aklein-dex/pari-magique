@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>League</th>
+      <th>faction</th>
       <th>User</th>
       <th>Occupation</th>
       <th colspan="3"></th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @members.each do |member| %>
       <tr>
-        <td><%= member.league %></td>
+        <td><%= member.faction %></td>
         <td><%= member.user %></td>
         <td><%= member.occupation %></td>
         <td><%= link_to 'Show', member %></td>

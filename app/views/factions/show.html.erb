@@ -1,9 +1,9 @@
-<% provide(:title, "League") %>
+<% provide(:title, "faction") %>
 
 <h1>
-  <%= @league.name %>
-  <% if can? :update, @league %>
-    <%= link_to edit_league_path(@league) do %>
+  <%= @faction.name %>
+  <% if can? :update, @faction %>
+    <%= link_to edit_faction_path(@faction) do %>
       <%= icon('edit') %>
     <% end %>
   <% end %>
@@ -36,26 +36,26 @@
   <div class="row">
   
     <div class="col-lg-4">
-      <div class="league-box">
+      <div class="faction-box">
       <h2>Tournaments</h2>
       <ul class="list-group">
-        <% @league.tournaments.each do |tournament| %>
+        <% @faction.tournaments.each do |tournament| %>
         <li class="list-group-item">
-          <%= link_to [@league, tournament], class: "action_button" do %>
+          <%= link_to [@faction, tournament], class: "action_button" do %>
             <%= icon('trophy') %> <%= tournament.name %>
           <% end %>
         </li>
         <% end %>
       </ul>
 
-      <% if can? :update, @league %>
+      <% if can? :update, @faction %>
       Add tournament:<br>
       <ul class="list-group">
         <% Tournament.all.each do |tournament| %>
             <li class="list-group-item">
               <%= tournament.name %>
-              <%= form_for @league do |form| %>
-                <%= form.hidden_field :league_id, id: :league_id, value: @league_id %>
+              <%= form_for @faction do |form| %>
+                <%= form.hidden_field :faction_id, id: :faction_id, value: @faction_id %>
                 <%= form.hidden_field :tournament_ids, id: :tournament_id, value: tournament.id %>
                 <%= form.submit "Add", class: "btn btn-primary" %>
               <% end %>
@@ -68,22 +68,22 @@
   
 
     <div class="col-lg-4">
-      <div class="league-box">
+      <div class="faction-box">
       <h2>Players</h2>
       <ul class="list-group">
-        <% @league.users.each do |user| %>
-          <li class="list-group-item"><%= user.username %> (<%= user.league_occupation(@league.id) %>)</li>
+        <% @faction.users.each do |user| %>
+          <li class="list-group-item"><%= user.username %> (<%= user.faction_occupation(@faction.id) %>)</li>
         <% end %>
       </ul>
       </div>
     </div><!-- /.col-lg-4 -->
   
-    <% if can? :update, @league %>
+    <% if can? :update, @faction %>
     <div class="col-lg-4">
-      <div class="league-box">
+      <div class="faction-box">
         <h2>Requests</h2>
         <ul class="list-group">
-        <% @league.requests.pending.each do |request| %>
+        <% @faction.requests.pending.each do |request| %>
           <li class="list-group-item">
             <%= request.user.username %>
             <%= form_for request  do |form| %>

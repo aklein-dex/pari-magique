@@ -1,7 +1,7 @@
 class CreateRankings < ActiveRecord::Migration[5.1]
   def change
     create_table :rankings do |t|
-      t.references :league, foreign_key: true, null: false
+      t.references :faction, foreign_key: true, null: false
       t.references :tournament, foreign_key: true, null: false
       t.references :member, foreign_key: true, null: false
       t.integer :point3, null: false, default: 0

@@ -1,11 +1,11 @@
 class Ranking < ApplicationRecord
-  belongs_to :league
+  belongs_to :faction
   belongs_to :tournament
   belongs_to :member
 
   validates :member_id, presence: true
   validates :tournament_id, presence: true
-  validates :league_id, presence: true
+  validates :faction_id, presence: true
 
   validates :point3, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :point1, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -17,11 +17,11 @@ class Ranking < ApplicationRecord
   end
   
   # could use this to increment but it does 2 queries (select and update) so it's not better:
-  #   Ranking.where(:member_id => guess.member_id, :tournament_id => @game.tournament_id, :league_id => guess.league_id).first.increment!(:point3)
+  #   Ranking.where(:member_id => guess.member_id, :tournament_id => @game.tournament_id, :faction_id => guess.faction_id).first.increment!(:point3)
   def self.update_rankings(game, undo_old_result = false)
     guesses = Guess.where(:game_id => game.id)
     guesses.each do |guess|
-      ranking = Ranking.where(:member_id => guess.member_id, :tournament_id => game.tournament_id, :league_id => guess.league_id).first
+      ranking = Ranking.where(:member_id => guess.member_id, :tournament_id => game.tournament_id, :faction_id => guess.faction_id).first
       
       # The result of the game was updated, so we should remove point(s) first.
       if undo_old_result

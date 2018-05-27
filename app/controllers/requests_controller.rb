@@ -17,7 +17,7 @@ class RequestsController < ApplicationController
   end
 
   def update
-    # TODO: check if the current_user is a coach and can modify the league
+    # TODO: check if the current_user is a coach and can modify the faction
     @request.accepted_at = Time.now
 
     respond_to do |format|
@@ -25,20 +25,20 @@ class RequestsController < ApplicationController
         if Request.statuses[@request.status] == Request.statuses[:accepted]
           # let's create a member
           username = User.where(id: @request.user_id).pluck(:username).first
-          member = Member.new(:user_id => @request.user_id, :league_id =>  @request.league_id, :occupation => :player, :username => username)
+          member = Member.new(:user_id => @request.user_id, :faction_id =>  @request.faction_id, :occupation => :player, :username => username)
           member.save
 
-          # and create a ranking for each tournament of the league
-          league = League.find(@request.league_id)
-          league.tournaments.each do |tournament|
-            ranking = Ranking.create(:member_id => member.id, :league_id =>  @request.league_id, :tournament_id => tournament.id)
+          # and create a ranking for each tournament of the faction
+          faction = faction.find(@request.faction_id)
+          faction.tournaments.each do |tournament|
+            ranking = Ranking.create(:member_id => member.id, :faction_id =>  @request.faction_id, :tournament_id => tournament.id)
 
             # TODO if there are already games played, then we should increase the value of "point0"
           end
         end
-        format.html { redirect_to @request.league, notice: 'Request was successfully updated.' }
+        format.html { redirect_to @request.faction, notice: 'Request was successfully updated.' }
       else
-        format.html { redirect_to @request.league, notice: 'Problem while updating request.' }
+        format.html { redirect_to @request.faction, notice: 'Problem while updating request.' }
       end
     end
   end
@@ -51,6 +51,6 @@ class RequestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def request_params
-    params.require(:request).permit(:league_id, :status)
+    params.require(:request).permit(:faction_id, :status)
   end
 end

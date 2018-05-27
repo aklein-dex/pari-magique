@@ -1,15 +1,15 @@
 <ul class="nav nav-pills flex-column">
   <li class="nav-item">
-      <h2 style="margin-top: 15px">Leagues</h2>
+      <h2 style="margin-top: 15px">My factions</h2>
   </li>
 
-  <% joined_leagues.each do |league| %>
+  <% joined_factions.each do |faction| %>
     <li class="nav-item">
-      <%= link_to league.name, league, class: "nav-link #{is_league_active(league)}" %>
+      <%= link_to faction.name, faction, class: "nav-link #{is_faction_active(faction)}" %>
       <ul class="nav nav-pills flex-column">
-        <% league.tournaments.each do |tournament| %>
+        <% faction.tournaments.each do |tournament| %>
           <li class="nav-item" style="padding-left: 15px">
-            <%= link_to [league, tournament], class: "nav-link #{is_tournament_active(tournament)}" do %>
+            <%= link_to [faction, tournament], class: "nav-link #{is_tournament_active(tournament)}" do %>
               <%= icon('trophy') %> <%= tournament.name %>
             <% end %>
           </li>
@@ -19,13 +19,13 @@
   <% end %>
 
   <li class="nav-item">
-    <%= link_to new_league_path, class: "nav-link" do %>
-      <%= icon("plus-square")%> Create a league
+    <%= link_to new_faction_path, class: "nav-link" do %>
+      <%= icon("plus-square")%> Create a faction
     <% end %>
   </li>
   <li class="nav-item">
-    <%= link_to leagues_path, class: "nav-link" do %>
-      <%= icon("user-plus")%> Join existing league
+    <%= link_to factions_path, class: "nav-link" do %>
+      <%= icon("user-plus")%> Join existing faction
     <% end %>
   </li>
 </ul>

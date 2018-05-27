@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>League</th>
+      <th>faction</th>
       <th>Tournament</th>
       <th>Member</th>
       <th>3 points</th>
@@ -18,7 +18,7 @@
   <tbody>
     <% @rankings.each do |ranking| %>
       <tr>
-        <td><%= ranking.league_id %></td>
+        <td><%= ranking.faction_id %></td>
         <td><%= ranking.tournament_id %></td>
         <td><%= ranking.member_id %></td>
         <td><%= ranking.point3 %></td>

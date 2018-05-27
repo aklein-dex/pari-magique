@@ -1,8 +1,8 @@
 class Request < ApplicationRecord
   belongs_to :user
-  belongs_to :league
+  belongs_to :faction
 
-  validates :league_id, presence: true
+  validates :faction_id, presence: true
   validates :user_id, presence: true
   validates :status, presence: true
 

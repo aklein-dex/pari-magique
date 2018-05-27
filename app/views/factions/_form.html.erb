@@ -1,10 +1,10 @@
-<%= form_with(model: league, local: true) do |form| %>
-  <% if league.errors.any? %>
+<%= form_with(model: faction, local: true) do |form| %>
+  <% if faction.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(league.errors.count, "error") %> prohibited this league from being saved:</h2>
+      <h2><%= pluralize(faction.errors.count, "error") %> prohibited this faction from being saved:</h2>
 
       <ul>
-      <% league.errors.full_messages.each do |message| %>
+      <% faction.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -14,7 +14,7 @@
   <div class="form-group row">
     <%= form.label :name, class: 'col-2 col-form-label' %>
     <div class="col-10">
-      <%= form.text_field :name, id: :league_name, class: 'form-control' %>
+      <%= form.text_field :name, id: :faction_name, class: 'form-control' %>
     </div>
   </div>
 

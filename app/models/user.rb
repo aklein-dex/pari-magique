@@ -15,31 +15,31 @@ class User < ApplicationRecord
             :presence => true
 
   has_many :members
-  has_many :leagues, :through => :members
+  has_many :factions, :through => :members
 
   has_many :messages, dependent: :destroy
 
-  def member_id_for_league(league_id)
-    Member.where(:league_id => league_id).where(:user_id => id).first.id
+  def member_id_for_faction(faction_id)
+    Member.where(:faction_id => faction_id).where(:user_id => id).first.id
   end
 
-  # Return the occupation of the user for the league
-  def league_occupation(league_id)
-    return "coach"  if is_coach?(league_id)
-    return "player" if is_player?(league_id)
+  # Return the occupation of the user for the faction
+  def faction_occupation(faction_id)
+    return "coach"  if is_coach?(faction_id)
+    return "player" if is_player?(faction_id)
     return "n/a"
   end
 
-  # Check if the current_user is a coach for the param league
-  def is_coach?(league_id)
-    member = members.where(:league_id => league_id).first
+  # Check if the current_user is a coach for the param faction
+  def is_coach?(faction_id)
+    member = members.where(:faction_id => faction_id).first
     return member.occupation?(:coach) if member
     false
   end
 
-  # Check if the current_user is a player for the param league
-  def is_player?(league_id)
-    member = members.where(:league_id => league_id).first
+  # Check if the current_user is a player for the param faction
+  def is_player?(faction_id)
+    member = members.where(:faction_id => faction_id).first
     return member.occupation?(:player) if member
     false
   end

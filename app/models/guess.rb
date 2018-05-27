@@ -1,11 +1,11 @@
 class Guess < ApplicationRecord
   belongs_to :member
   belongs_to :game
-  belongs_to :league
+  belongs_to :faction
 
   validates :member_id, presence: true
   validates :game_id, presence: true
-  validates :league_id, presence: true
+  validates :faction_id, presence: true
   validates :result,
             length: { maximum: 5 },
             format: { with: /\A[\d]?[\d]-[\d]?[\d]\z/i }
