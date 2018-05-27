@@ -11,6 +11,8 @@ gem 'devise'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'sprockets-rails'
 gem 'jquery-rails'
+# To use  datepicker
+#em 'jquery-ui-rails'
 
 # To use icons
 gem 'font-awesome-sass'

@@ -12,69 +12,72 @@
   <% end %>
 
   <div class="form-group row">
-    <%= form.label :tournament_id, class: 'col-2 col-form-label' %>
+    <%= form.label :tournament_id, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, class: 'form-control') %>
+      <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, {}, {class: 'form-control'}) %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :home_id, class: 'col-2 col-form-label' %>
+    <%= form.label :home_id, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.collection_select(:home_id, Team.all, :id, :name) %>
+      <%= form.collection_select(:home_id, Team.all, :id, :name, {}, {class: 'form-control'}) %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :away_id, class: 'col-2 col-form-label' %>
+    <%= form.label :away_id, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.collection_select(:away_id, Team.all, :id, :name) %>
+      <%= form.collection_select(:away_id, Team.all, :id, :name, {}, {class: 'form-control'}) %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :result, class: 'col-2 col-form-label' %>
+    <%= form.label :result, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.text_field :result, id: :game_result %>
+      <%= form.text_field :result, id: :game_result, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :kickoff_at, class: 'col-2 col-form-label' %>
+    <%= form.label :kickoff_at, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.datetime_select :kickoff_at, id: :game_kickoff_at %>
+      <%= form.datetime_select :kickoff_at, id: :game_kickoff_at, :minute_step => 15 %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :stage, class: 'col-2 col-form-label' %>
+    <%= form.label :stage, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.select :stage, Game.stages.keys, id: :game_stage %>
+      <%= form.select :stage, Game.stages.keys, {id: :game_stage}, {class: 'form-control'} %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :round, class: 'col-2 col-form-label' %>
+    <%= form.label :round, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.select :round, Game.rounds.keys, id: :game_round %>
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <%= form.label :group, class: 'col-2 col-form-label' %>
-    <div class="col-10">
-      <%= form.select :group, Game.groups.keys, id: :game_group %>
+      <%= form.select :round, Game.rounds.keys, {id: :game_round}, {class: 'form-control'} %>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :stadium_id, class: 'col-2 col-form-label' %>
+    <%= form.label :group, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
-      <%= form.collection_select(:stadium_id, Stadium.all, :id, :name) %>
+      <%= form.select :group, Game.groups.keys, {id: :game_group}, {class: 'form-control'} %>
     </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit "Submit", class: "btn btn-primary" %>
+  <div class="form-group row">
+    <%= form.label :stadium_id, class: 'col-md-2 col-xs-12 col-form-label' %>
+    <div class="col-10">
+      <%= form.collection_select(:stadium_id, Stadium.all, :id, :name, {}, {class: 'form-control'}) %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-2"></div>
+    <div class="col-10">
+      <%= form.submit "Update", class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>
