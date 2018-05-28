@@ -1,45 +1,50 @@
 
 <h3><%= title %></h3>
 
-<table class="table vertical-align">
-  <tbody>
+<!-- https://v4-alpha.getbootstrap.com/layout/grid/ -->
+<!-- https://stackoverflow.com/questions/35351353/missing-visible-and-hidden-in-bootstrap-v4 -->
 
-  <% games.each do |game| %>
-    <tr>
-      <td>
-        <%= game.kickoff_at_format %>
-        <br>
-        <% if game.group != nil %>
-          Group <%= game.group %>,
-        <% end %>
-        <%= game.round %>
-        <br>
-        <%= game.stadium.name %>
-      </td>
-      <td class="flag_size_col2"><%= image_tag(game.home.flag_path, size: "46x28") %></td>
-      <td class="big_font"><%= game.home.name %></td>
-      <td class="center">
-        <% if is_past_game(game) %>
-          <span class="big_font"><%= game.result %></span>
-          <br>
-          <% if game.guess_result %>
-            <span class="badge <%= getBadgeClass(game.result, game.guess_result) %>"><%= game.guess_result %></span>
-          <% else %>
-            n/a
-          <% end %>
-        <% else %>
-          <%= text_field_tag "guess-game-#{game.id}", game.guess_result, size: 5,
-                "data-original-guess": "#{game.guess_result}",
-                onfocusout: "updateGuess(#{game.id})" %>
-        <% end %>
-      </td>
-      <td class="big_font text-right"><%= game.away.name %></td>
-      <td class="flag_size_col"><%= image_tag(game.away.flag_path, size: "46x28") %></td>
+<% games.each do |game| %>
+<div class="row row-games">
+  <div class="col-md-3 col-3">
+    <span class="d-md-none">
+      <%= game.kickoff_at_format("%d/%m, %H:%M") %>
+    </span>
+    <span class="d-none d-lg-block">
+      <%= game.kickoff_at_format %>
+    </span>
+    <span class="d-none d-lg-block">
+      <% if game.group != nil %>
+        Group <%= game.group %>,
+      <% end %>
+      <%= game.round %>
+      <br>
+      <%= game.stadium.name %>
+    </span>
+  </div>
+  <div class="col-3 col-md-1 "><%= image_tag(game.home.flag_path, size: "46x28") %></div>
+  <div class="col-md-3 d-none d-lg-block big_font"><%= game.home.name %></div>
+  <div class="col-md-1 col-3 center">
+    <% if is_past_game(game) %>
+      <span class="big_font"><%= game.result %></span>
+      <br>
+      <% if game.guess_result %>
+        <span class="badge <%= getBadgeClass(game.result, game.guess_result) %>"><%= game.guess_result %></span>
+      <% else %>
+        n/a
+      <% end %>
+    <% else %>
+      <%= text_field_tag "guess-game-#{game.id}", game.guess_result, size: 3,
+            "data-original-guess": "#{game.guess_result}",
+            onfocusout: "updateGuess(#{game.id})" %>
+    <% end %>
+  </div>
+  <div class="col-md-3 d-none d-lg-block big_font text-right"><%= game.away.name %></div>
+  <div class="col-md-1 col-3"><%= image_tag(game.away.flag_path, size: "46x28") %></div>
 
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+</div>
+<% end %>
+
 
 <script>
   // update the guess using ajax
