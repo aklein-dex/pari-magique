@@ -12,13 +12,16 @@
   <% end %>
 
   <div class="form-group row">
-    <%= form.label :name, class: 'col-2 col-form-label' %>
+    <%= form.label :name, class: 'col-md-2 col-xs-12 col-form-label' %>
     <div class="col-10">
       <%= form.text_field :name, id: :faction_name, class: 'form-control' %>
     </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit "Submit", class: "btn btn-primary" %>
+  <div class="form-group row">
+    <div class="col-md-2"></div>
+    <div class="col-10">
+      <%= form.submit "Submit", class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>
