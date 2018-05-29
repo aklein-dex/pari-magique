@@ -1,49 +1,46 @@
 
-<h3><%= title %></h3>
+<% games.each do |game| %>
+<div class="row row-games">
+  <div class="col-md-2 col-2">
+    <span class="d-md-none">
+      <%= game.kickoff_at_format("%d/%m %H:%M") %>
+    </span>
+    <span class="d-none d-md-block">
+      <%= game.kickoff_at_format %>
+    </span>
+    <span class="d-none d-md-block">
+      <% if game.group != nil %>
+        Group <%= game.group %>,
+      <% end %>
+      <%= game.round %>
+      <br>
+      <%= game.stadium.name %>
+    </span>
+  </div>
+  <div class="col-3 col-md-1 "><%= image_tag(game.home.flag_path, size: "46x28") %></div>
+  <div class="col-md-3 d-none d-md-block big_font"><%= game.home.name %></div>
+  <div class="col-md-1 col-3 center">
+    <% if not game.result.empty? %>
+      <span class="big_font"><%= game.result %></span>
+    <% else %>
+      <%= text_field_tag "game-#{game.id}", game.result, size: 3,
+            "data-original-result": "#{game.result}",
+            onfocusout: "updateResult(#{game.id})" %>
+    <% end %>
+  </div>
+  <div class="col-md-3 d-none d-md-block big_font text-right"><%= game.away.name %></div>
+  <div class="col-md-1 col-3"><%= image_tag(game.away.flag_path, size: "46x28") %></div>
+  <div class="col-md-1 col-12" style="border-bottom: 1px solid #eceeef">
+    <%= link_to edit_manager_game_path(game), class: "action_button" do %>
+      <i class="fa fa-pencil-square-o"></i>
+    <% end %>
+    <%= link_to [:manager, game], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <i class="fa fa-times"></i>
+    <% end %>
+  </div>
+</div>
+<% end %>
 
-<table class="table vertical-align">
-  <tbody>
-    
-  <% games.each do |game| %>
-    <tr>
-      <td>
-        <%= game.kickoff_at %>
-        <br>
-        <% if game.group != nil %>
-          Group <%= game.group %>,
-        <% end %>
-        <%= game.round %>
-        <br>
-        <%= game.stadium.name %>
-      </td>
-      <td class="flag_size_col2"><%= image_tag(game.home.flag_path, size: "46x28") %></td>
-      <td class="big_font"><%= game.home.name %></td>
-      <td class="center">
-        <% if not game.result.empty? %>
-          <span class="big_font"><%= game.result %></span>
-        <% else %>
-          <%= text_field_tag "game-#{game.id}", game.result, size: 5,
-                "data-original-result": "#{game.result}",
-                onfocusout: "updateResult(#{game.id})" %>
-        <% end %>
-      </td>
-      <td class="big_font text-right"><%= game.away.name %></td>
-      <td class="flag_size_col"><%= image_tag(game.away.flag_path, size: "46x28") %></td>
-      <td>
-        <%= link_to [:manager, game], class: "action_button" do %>
-          <i class="fa fa-info-circle"></i>
-        <% end %>
-        <%= link_to edit_manager_game_path(game), class: "action_button" do %>
-          <i class="fa fa-pencil-square-o"></i>
-        <% end %>
-        <%= link_to [:manager, game], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <i class="fa fa-times"></i>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
 
 <script>
   // update the result using ajax

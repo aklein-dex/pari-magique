@@ -5,10 +5,10 @@
 <!-- https://stackoverflow.com/questions/35351353/missing-visible-and-hidden-in-bootstrap-v4 -->
 
 <% games.each do |game| %>
-<div class="row row-games">
+<div class="row row-games" style="border-bottom: 1px solid #eceeef">
   <div class="col-md-3 col-3">
     <span class="d-md-none">
-      <%= game.kickoff_at_format("%d/%m, %H:%M") %>
+      <%= game.kickoff_at_format("%d/%m %H:%M") %>
     </span>
     <span class="d-none d-md-block">
       <%= game.kickoff_at_format %>

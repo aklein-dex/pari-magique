@@ -2,51 +2,6 @@
 <div class="container">
 <h1>Games</h1>
 
-<% if false %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Tournament</th>
-      <th>Home</th>
-      <th>Away</th>
-      <th>Result</th>
-      <th>Kickoff At</th>
-      <th>Stage</th>
-      <th>Round</th>
-      <th>Group</th>
-      <th>Stadium</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= game.tournament.name %></td>
-        <td><%= game.home.name %></td>
-        <td><%= game.away.name %></td>
-        <td><%= game.result %></td>
-        <td><%= game.kickoff_at %></td>
-        <td><%= game.stage %></td>
-        <td><%= game.round %></td>
-        <td><%= game.group %></td>
-        <td><%= game.stadium.name %></td>
-        <td>
-          <%= link_to [:manager, game], class: "action_button" do %>
-              <i class="fa fa-info-circle"></i>
-          <% end %>
-          <%= link_to edit_manager_game_path(game), class: "action_button" do %>
-              <i class="fa fa-pencil-square-o"></i>
-          <% end %>
-          <%= link_to [:manager, game], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <i class="fa fa-times"></i>
-              <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<% end %>
 <%= render partial: 'games', locals: { games: @games, title: "Games" } %>
 
 <br>
