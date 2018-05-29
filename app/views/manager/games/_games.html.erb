@@ -46,14 +46,14 @@
   // update the result using ajax
   function updateResult(gameId) {
     result = $("#game-" + gameId).val();
-    
-    if (result == "") 
+
+    if (result == "")
       return;
-    
+
     originalResult = $("#game-" + gameId).attr("data-original-result")
     if (result == originalResult)
       return;
-    
+
     $.ajax({
       type: "POST",
       url: "<%= manager_games_path %>/" + gameId + ".json",
