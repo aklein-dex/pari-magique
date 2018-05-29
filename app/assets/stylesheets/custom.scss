@@ -1,6 +1,14 @@
 
 body {
-  padding-top: 50px;
+  padding-top: 70px;
+}
+
+@media (max-width: 576px) {
+  /* by default there is a padding of 15px, but I don't want it on small screen */
+  main {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 
 .index-box {
@@ -177,13 +185,13 @@ input[type="checkbox"] {
   width: 26px;
 }
 
-@media (max-width: 991px) { 
+@media (max-width: 991px) {
     .big_font {
       text-transform: uppercase;
       font-size: 20px;
     }
 }
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
     .big_font {
       text-transform: uppercase;
       font-size: 25px;

@@ -8,6 +8,24 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="dropdown nav-item">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">My Factions <b class="caret"></b></a>
+              <div class="dropdown-menu">
+                <% joined_factions.each do |faction| %>
+                    <%= link_to faction.name, faction, class: "dropdown-item #{is_faction_active(faction)}" %>
+                <% end %>
+                <hr>
+                <%= link_to new_faction_path, class: "dropdown-item" do %>
+                  <%= icon("plus-square")%> Create a faction
+                <% end %>
+                <%= link_to factions_path, class: "dropdown-item" do %>
+                  <%= icon("user-plus")%> Join existing faction
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+
           <li class="nav-item"><%= link_to "Rules",  rules_path, class: "nav-link" %></li>
 
           <% if user_signed_in? and current_user.manager? or current_user.admin? %>
