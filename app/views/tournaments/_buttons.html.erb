@@ -1,15 +1,50 @@
 
-<div class="btn-group" role="group" aria-label="Basic example">
-  <%= link_to 'Group A', faction_tournament_group_path(@faction, @tournament, "A"), class: "btn btn-secondary" %>
-  <%= link_to 'Group B', faction_tournament_group_path(@faction, @tournament, "B"), class: "btn btn-secondary" %>
-  <%= link_to 'Group C', faction_tournament_group_path(@faction, @tournament, "C"), class: "btn btn-secondary" %>
-  <%= link_to 'Group D', faction_tournament_group_path(@faction, @tournament, "D"), class: "btn btn-secondary" %>
-  <%= link_to 'Group E', faction_tournament_group_path(@faction, @tournament, "E"), class: "btn btn-secondary" %>
-  <%= link_to 'Group F', faction_tournament_group_path(@faction, @tournament, "F"), class: "btn btn-secondary" %>
-  <%= link_to 'Group G', faction_tournament_group_path(@faction, @tournament, "G"), class: "btn btn-secondary" %>
-  <%= link_to 'Group H', faction_tournament_group_path(@faction, @tournament, "H"), class: "btn btn-secondary" %>
-  <button type="button" class="btn btn-secondary">Round of 16</button>
-  <button type="button" class="btn btn-secondary">Quarter-finals</button>
-  <button type="button" class="btn btn-secondary">Semi-finals</button>
-  <button type="button" class="btn btn-secondary">Final</button>
-</div>
+<nav class="navbar navbar-toggleable-md navbar-light" style="background-color: #e3f2fd;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <span class="navbar-brand d-none d-lg-block" href="#">&nbsp;</span>
+  <span class="navbar-brand d-lg-none" href="#">Groups</span>
+  
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+          <li class="nav-item">
+            <%= link_to 'Group A', faction_tournament_group_path(@faction, @tournament, "A"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group B', faction_tournament_group_path(@faction, @tournament, "B"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group C', faction_tournament_group_path(@faction, @tournament, "C"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group D', faction_tournament_group_path(@faction, @tournament, "D"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group E', faction_tournament_group_path(@faction, @tournament, "E"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group F', faction_tournament_group_path(@faction, @tournament, "F"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group G', faction_tournament_group_path(@faction, @tournament, "G"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Group H', faction_tournament_group_path(@faction, @tournament, "H"), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Round of 16', "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Quarter-finals', "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Semi-finals', "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Final', "#", class: "nav-link" %>
+          </li>
+      </ul>
+    </div>
+</nav>
+
