@@ -39,7 +39,7 @@
       <div class="faction-box">
       <h2>Tournaments</h2>
       <ul class="list-group">
-        <% @faction.tournaments.each do |tournament| %>
+        <% @tournaments.each do |tournament| %>
         <li class="list-group-item">
           <%= link_to [@faction, tournament], class: "action_button" do %>
             <%= icon('trophy') %> <%= tournament.name %>
@@ -48,10 +48,10 @@
         <% end %>
       </ul>
 
-      <% if can? :update, @faction %>
+      <% if can? :update, @faction and @can_join_tournaments.size > 0 %>
       Add tournament:<br>
       <ul class="list-group">
-        <% Tournament.all.each do |tournament| %>
+        <% @can_join_tournaments.each do |tournament| %>
             <li class="list-group-item">
               <%= tournament.name %>
               <%= form_for @faction do |form| %>

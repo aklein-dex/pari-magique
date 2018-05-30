@@ -13,6 +13,9 @@ class FactionsController < ApplicationController
   def show
     @chat_room = ChatRoom.includes(:messages).find_by(faction_id: @faction.id)
     @message   = Message.new
+    
+    @tournaments = @faction.tournaments
+    @can_join_tournaments = Tournament.where.not(id: @tournaments.map(&:id))
   end
 
   # GET /factions/new
