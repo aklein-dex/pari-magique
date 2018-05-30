@@ -16,11 +16,10 @@
         <tr>
           <% row.each_with_index do |col, col_index| %>
             <% if col_index == 0 %>
-              <th colspan="4">
+              <th colspan="4">Game
             <% else %>
-              <th>
+              <th><%= col %>
             <% end %>
-              <%= col %>
             </th>
           <% end %>
         </tr>
@@ -29,10 +28,10 @@
       <tr>
         <% row.each_with_index do |col, col_index| %>
           <% if col_index == 0 %>
-            <th scope="row" class="big_font text-right"><%= col.home.name %></th>
+            <th scope="row" class="big_font text-right"><span class="d-none d-md-block"><%= col.home.name %></span></th>
             <th scope="row" class="flag_size_col"><%= image_tag(col.home.flag_path, size: "46x28") %></th>
             <th scope="row" class="flag_size_col"><%= image_tag(col.away.flag_path, size: "46x28") %></th>
-            <th scope="row" class="big_font"><%= col.away.name %></th>
+            <th scope="row" class="big_font"><span class="d-none d-md-block"><%= col.away.name %></span></th>
           <% elsif col_index == 1 %>
             <td class="big_font">
               <%= col %>
