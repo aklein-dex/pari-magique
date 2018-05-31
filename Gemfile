@@ -8,7 +8,7 @@ gem 'rails', '~> 5.1.0'
 gem 'devise'
 
 # Twitter bootstrap
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 4.1.1'
 gem 'sprockets-rails'
 gem 'jquery-rails'
 # To use  datepicker

@@ -1,26 +1,26 @@
 
-<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <%= link_to "Pari-magique", root_path, id: "logo", class: "navbar-brand" %>
 
-      <%= link_to "Pari-magique", root_path, id: "logo", class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
             <li class="dropdown nav-item">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">My Factions <b class="caret"></b></a>
-              <div class="dropdown-menu">
+              <a href="#" class="nav-item nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="dropdown03" aria-haspopup="true" aria-expanded="false">My Factions <b class="caret"></b></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown03">
                 <% joined_factions.each do |faction| %>
                     <%= link_to faction.name, faction, class: "dropdown-item #{is_faction_active(faction)}" %>
                 <% end %>
                 <hr>
                 <%= link_to new_faction_path, class: "dropdown-item" do %>
-                  <%= icon("plus-square")%> Create a faction
+                  <%= icon('far', "plus-square")%> Create a faction
                 <% end %>
                 <%= link_to factions_path, class: "dropdown-item" do %>
-                  <%= icon("user-plus")%> Join existing faction
+                  <%= icon('fas', "user-plus")%> Join existing faction
                 <% end %>
               </div>
             </li>
@@ -49,14 +49,14 @@
         <ul class="navbar-nav">
           <% if user_signed_in? %>
             <li class="dropdown nav-item" style="margin-right: 50px;">
-              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><%= icon('user-circle')%> <%= current_user.username %> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><%= icon('far', 'user-circle')%> <%= current_user.username %> <b class="caret"></b></a>
               <div class="dropdown-menu">
                 <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
-                  <%= icon('cog')%> Profile
+                  <%= icon('fas', 'cog')%> Profile
                 <% end %>
                 <div class="dropdown-divider"></div>
                 <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-                  <%= icon('sign-out')%> Log out
+                  <%= icon('far', 'sign-out')%> Log out
                 <% end %>
               </div>
             </li>

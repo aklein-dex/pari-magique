@@ -10,7 +10,7 @@
         <% faction.tournaments.each do |tournament| %>
           <li class="nav-item" style="padding-left: 15px">
             <%= link_to [faction, tournament], class: "nav-link #{is_tournament_active(tournament)}" do %>
-              <%= icon('trophy') %> <%= tournament.name %>
+              <%= icon('fas', 'trophy') %> <%= tournament.name %>
             <% end %>
           </li>
         <% end %>
@@ -20,12 +20,12 @@
   <li><hr></li>
   <li class="nav-item">
     <%= link_to new_faction_path, class: "nav-link" do %>
-      <%= icon("plus-square")%> Create a faction
+      <%= icon('far', "plus-square")%> Create a faction
     <% end %>
   </li>
   <li class="nav-item">
     <%= link_to factions_path, class: "nav-link" do %>
-      <%= icon("user-plus")%> Join existing faction
+      <%= icon('fas', "user-plus")%> Join existing faction
     <% end %>
   </li>
 </ul>

@@ -4,7 +4,7 @@
   <%= @faction.name %>
   <% if can? :update, @faction %>
     <%= link_to edit_faction_path(@faction) do %>
-      <%= icon('edit') %>
+      <%= icon('far', 'edit') %>
     <% end %>
   <% end %>
 </h1>
@@ -16,7 +16,7 @@
   </ul>
 
   <br>
-  
+
   <%= form_for @message, url: '#' do |f| %>
     <div class="form-group">
       Enter your message:
@@ -34,7 +34,7 @@
 <div class="container marketing">
 
   <div class="row">
-  
+
     <div class="col-lg-4">
       <div class="faction-box">
       <h2>Tournaments</h2>
@@ -42,7 +42,7 @@
         <% @tournaments.each do |tournament| %>
         <li class="list-group-item">
           <%= link_to [@faction, tournament], class: "action_button" do %>
-            <%= icon('trophy') %> <%= tournament.name %>
+            <%= icon('fas', 'trophy') %> <%= tournament.name %>
           <% end %>
         </li>
         <% end %>
@@ -65,7 +65,7 @@
       <% end %>
       </div>
     </div><!-- /.col-lg-4 -->
-  
+
 
     <div class="col-lg-4">
       <div class="faction-box">
@@ -77,7 +77,7 @@
       </ul>
       </div>
     </div><!-- /.col-lg-4 -->
-  
+
     <% if can? :update, @faction %>
     <div class="col-lg-4">
       <div class="faction-box">
@@ -101,5 +101,5 @@
       </div>
     </div><!-- /.col-lg-4 -->
     <% end %>
-  </div>  
+  </div>
 </div>
