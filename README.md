@@ -1,46 +1,49 @@
 # Pari-magique
 
-Rails Web site for users to predict the result of soccer games.
+Rails website for users to predict the result of soccer games.
 
 ### Background
 
-I had this idea in 2008. With a small group of friends we decided to predict the result of games during major competitions (Euro and World Cup). I was using a static html page. Users were sending me their guesses by email and I modified the html page manually. It was a lot of work.
-In 2012, more friends joined and it would have been to much work to do everything manually so I created a more dynamic PHP Web site (using [Yii framework](www.yiiframework.com/)) where people could log in and enter their guesses. 
-In 2017, I decided to switch to Rails because it is my favorite Web framework and I could add more features.
+In 2008, I had an idea to create a website to bet with my friends on soccer games during major competitions (Euro and World Cup). I was using static html pages. Users were sending me their guesses by email and I modified the html pages manually. It was a lot of work.
+In 2012, more friends joined and I didn't want to do everything manually so I created a more dynamic PHP website (using [Yii framework](www.yiiframework.com/)) where people could log in and enter their guesses. 
+In 2017, I decided to switch to Rails because it is my favorite Web framework and I decided to use Github and Heroku.
 
-### Development process 
-
-* Phase 1 (done)
-  * design database 
-  * add authentication
-  * create relationships between models (ActiveRecord) 
-  * create sample forms (views) for all the models 
-  * add basic authorization 
-* Phase 2
-  * implements a quick prototype with some basic features (to have a better idea of the final project)
-  * This should be done before the World Cup 2018 in Russia!
-* Phase 3
-  * review all features one by one (improve them and create tests)
-* Phase 4
-  * improve design
 
 ### Deployment
 
-The goal is to use github with [Heroku](https://www.heroku.com/) for easy deployment.
 
-Ruby version **2.3.4** (latest version supported by Heroku)
+#### Production environment
 
-#### Instructions 
+The goal is to use Github with [Heroku](https://www.heroku.com/) for easy deployment.
 
-TODO
+After creating an account and setting up Heroku, execute the following commands to deploy Pari-magique.
 
 ```
-bundle install --without production
+$ heroku create
+$ git push heroku master
+$ heroku run rake db:migrate
+$ heroku open
+$ heroku logs
 ```
 
-#### Redis
+The version of bundler of this project should match with the version of bundler used on Heroku.
 
-Please follow this tutorial to install Redis: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04
+#### Development environment
+
+##### Redis
+
+Please follow the tutorial from  [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04) to install Redis otherwise the chat will failed.
+
+##### Start the server
+
+Execute the following commands to start the server:
+
+```
+$ bundle install --without production
+$ rake db:migrate
+$ rake db:seed
+$ rails s
+```
 
 ### Tests
 
@@ -72,22 +75,22 @@ To insert data run: ```rake db:seed```
 
 ##### member
 
-* see leagues
-* create a league (and becomes coach)
-* send a request to join a league (and becomes player)
+* see factions
+* create a faction (and becomes coach)
+* send a request to join a faction (and becomes player)
 
 ##### unregistered user
 
 * create an account (and becomes member)
 
-#### League wide
+#### Faction wide
 
-A league is a group of users. For example, you can be a member of a league with your friends and a member of a second league with your coworkers.
+A faction is a group of users. For example, you can be a member of a faction with your friends and a member of a second faction with your coworkers.
   
 ##### coach
 
-* add tournaments to a league
-* accept requets from players to join the league
+* add tournaments to a faction
+* accept requets from players to join the faction
 * promote players to coach
 
 ##### player
