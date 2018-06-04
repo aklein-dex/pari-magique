@@ -26,6 +26,7 @@
       <%= text_field_tag "game-#{game.id}", game.result, size: 3,
             "data-original-result": "#{game.result}",
             onfocusout: "updateResult(#{game.id})" %>
+      <%= content_tag(:span, "", id: "status-game-#{game.id}") %>
     <% end %>
   </div>
   <div class="col-md-3 d-none d-md-block big_font text-right"><%= game.away.name %></div>
@@ -66,12 +67,15 @@
         if (data.msg == "ok") {
           $("#game-" + gameId).css("background-color", "greenyellow");
           $("#game-" + gameId).attr("data-original-result", result);
+          $("#status-game-" + gameId).html("saved");
         } else {
           $("#game-" + gameId).css("background-color", "red");
+          $("#status-game-" + gameId).html("error");
         }
       },
       error: function(data) {
         $("#game-" + gameId).css("background-color", "red");
+        $("#status-game-" + gameId).html("error");
       }
   });
   }

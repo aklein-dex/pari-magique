@@ -3,7 +3,14 @@
 
 <!-- https://v4-alpha.getbootstrap.com/layout/grid/ -->
 <!-- https://stackoverflow.com/questions/35351353/missing-visible-and-hidden-in-bootstrap-v4 -->
+The format of your guess should be <strong>X-X</strong>. For example: 1-0.
+<br>
+Your guess is saved when the input field <strong>loses focus</strong> and the background color turns <strong>green</strong>.
+<br>
+If the background color is <strong>red</strong>, then it means there was an error (either the format of
+your guess is not valid or a connection problem).
 
+<br><br>
 <% games.each do |game| %>
 <div class="row row-games" style="border-bottom: 1px solid #eceeef">
   <div class="col-md-3 col-3">
@@ -37,6 +44,7 @@
       <%= text_field_tag "guess-game-#{game.id}", game.guess_result, size: 3,
             "data-original-guess": "#{game.guess_result}",
             onfocusout: "updateGuess(#{game.id})" %>
+      <%= content_tag(:span, "", id: "status-guess-game-#{game.id}") %>
     <% end %>
   </div>
   <div class="col-md-3 d-none d-md-block big_font text-right"><%= game.away.name %></div>
@@ -71,12 +79,15 @@
         if (data.msg == "ok") {
           $("#guess-game-" + gameId).css("background-color", "greenyellow");
           $("#guess-game-" + gameId).attr("data-original-guess", guess);
+          $("#status-guess-game-" + gameId).html("saved");
         } else {
           $("#guess-game-" + gameId).css("background-color", "red");
+          $("#status-guess-game-" + gameId).html("error");
         }
       },
       error: function(data) {
         $("#guess-game-" + gameId).css("background-color", "red");
+        $("#status-guess-game-" + gameId).html("error");
       }
   });
   }
