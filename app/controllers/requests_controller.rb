@@ -29,7 +29,7 @@ class RequestsController < ApplicationController
           member.save
 
           # and create a ranking for each tournament of the faction
-          faction = faction.find(@request.faction_id)
+          faction = Faction.find(@request.faction_id)
           faction.tournaments.each do |tournament|
             ranking = Ranking.create(:member_id => member.id, :faction_id =>  @request.faction_id, :tournament_id => tournament.id)
 
