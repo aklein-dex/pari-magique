@@ -32,10 +32,10 @@
   <div class="col-md-1 col-3"><%= image_tag(game.away.flag_path, size: "46x28") %></div>
   <div class="col-md-1 col-12" style="border-bottom: 1px solid #eceeef">
     <%= link_to edit_manager_game_path(game), class: "action_button" do %>
-      <i class="fa fa-pencil-square-o"></i>
+      <%= icon('far', 'edit') %>
     <% end %>
     <%= link_to [:manager, game], class: "action_button", method: :delete, data: { confirm: 'Are you sure?' } do %>
-      <i class="fa fa-times"></i>
+      <%= icon('fas', 'times') %>
     <% end %>
   </div>
 </div>
