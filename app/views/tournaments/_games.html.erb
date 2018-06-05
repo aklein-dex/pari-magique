@@ -3,14 +3,17 @@
 
 <!-- https://v4-alpha.getbootstrap.com/layout/grid/ -->
 <!-- https://stackoverflow.com/questions/35351353/missing-visible-and-hidden-in-bootstrap-v4 -->
-The format of your guess should be <strong>X-X</strong>. For example: 1-0.
-<br>
-Your guess is saved when the input field <strong>loses focus</strong> and the background color turns <strong>green</strong>.
-<br>
-If the background color is <strong>red</strong>, then it means there was an error (either the format of
-your guess is not valid or a connection problem).
 
-<br><br>
+<% if local_assigns.has_key? :show_help %>
+    The format of your guess should be <strong>X-X</strong>. For example: 1-0.
+    <br>
+    Your guess is saved when the input field <strong>loses focus</strong> and the background color turns <strong>green</strong>.
+    <br>
+    If the background color is <strong>red</strong>, then it means there was an error (either the format of
+    your guess is not valid or a connection problem).
+    <br><br>
+<% end %>
+
 <% games.each do |game| %>
 <div class="row row-games" style="border-bottom: 1px solid #eceeef">
   <div class="col-md-3 col-3">
