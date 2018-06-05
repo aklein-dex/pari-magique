@@ -5,8 +5,11 @@ class ApplicationController < ActionController::Base
   around_action :user_time_zone, if: :current_user
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied."
-    redirect_to root_url, :alert => exception.message
+    if current_user
+      redirect_to static_pages_home_url, :alert => exception.message
+    else
+      redirect_to root_url, :alert => exception.message
+    end
   end
 
   # After logging in, the user is redirected to the home page
