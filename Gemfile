@@ -20,6 +20,9 @@ gem 'font-awesome-sass'
 # For authorization
 gem 'cancancan'
 
+# To paginate
+gem 'will_paginate'
+
 gem 'actionpack'
 
 # Use Puma as the app server

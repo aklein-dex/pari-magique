@@ -11,11 +11,11 @@ class Manager::GamesController < ApplicationController
       redirect_to manager_games_url, alert: 'No file specified.'
     end
   end
-  
+
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all.includes(:home, :away, :stadium, :tournament)
+    @games = Game.all.includes(:home, :away, :stadium, :tournament).paginate(:page => params[:page], :per_page => 10).order('kickoff_at DESC')
   end
 
   # GET /games/1
