@@ -5,7 +5,7 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    if user.role? :member
+    if user.role? :member or user.role? :manager
       can [:create], Request
       can [:update], Request do |request|
         user.is_coach?(request.faction.id)
@@ -29,7 +29,7 @@ class Ability
     end
 
     if user.role? :manager
-      can [:create], Guess
+      can [:read, :update], Game
     end
 
     if user.role? :admin
