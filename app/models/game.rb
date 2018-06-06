@@ -18,6 +18,7 @@ class Game < ApplicationRecord
   validates :kickoff_at, presence: true
   validates :stage, presence: true
   validates :stadium_id, presence: true
+  validate :result_cannot_be_set_until_game_is_finished
 
   enum stage: [:one, :two, :three]
   enum round: [:round1, :round2, :round3, :round4, :round16, :quarter, :semi, :finale]
@@ -27,7 +28,6 @@ class Game < ApplicationRecord
   scope :last_5_games, -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc).limit(5)}
   scope :past_games,   -> { where("kickoff_at < ?", Time.now).order(kickoff_at: :desc)}
 
-  after_validation :edit_result_past_games_only
   after_update :update_rankings, if: :saved_change_to_result?
 
   def kickoff_at_format(format = "%d %b, %H:%M")
@@ -92,7 +92,11 @@ class Game < ApplicationRecord
       end
     end
 
-    def edit_result_past_games_only
-      # todo we should be able to edit the result only if now > kickoff_at
+    # To avoid possible errors like update the wrong game, we make
+    # sure the game is finished before updating the result.
+    def result_cannot_be_set_until_game_is_finished
+      if not result.empty? and (kickoff_at + 90*60) > Time.now
+        errors.add(:result, "can't be set until game is finished")
+      end
     end
 end
