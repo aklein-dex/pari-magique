@@ -2,10 +2,14 @@ class FactionsController < ApplicationController
   before_action :set_faction, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
-  # GET /games
-  # GET /games.json
+  # GET /factions
+  # GET /factions.json
   def index
-    @factions = Faction.all
+    # factions with pending request
+    @pending_factions  = Faction.with_pending_requests(current_user)
+    # factions that the user can send a request to join (which means the user hasn't sent a request yet)
+    @possible_factions = Faction.can_send_request(current_user)
+    @request  = Request.new
   end
 
   # GET /factions/1

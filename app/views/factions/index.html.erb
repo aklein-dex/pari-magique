@@ -1,22 +1,32 @@
 <% provide(:title, "factions") %>
+<div class="container">
+    
+<h1>Factions</h1>
 
-<h1>factions</h1>
-
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @factions.each do |faction| %>
+    <% @pending_factions.each do |faction| %>
       <tr>
         <td><%= faction.name %></td>
-        <td><%= link_to 'Show', faction %></td>
-        <td><%= link_to 'Edit', edit_faction_path(faction) %></td>
-        <td><%= link_to 'Destroy', faction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>Waiting for answer</td>
+      </tr>
+    <% end %>
+    <% @possible_factions.each do |faction| %>
+      <tr>
+        <td><%= faction.name %></td>
+        <td>
+          <%= form_for @request  do |form| %>
+            <%= form.hidden_field :faction_id, id: :faction_id, value: faction.id %>
+            <%= form.submit "Send request", class: "btn btn-primary" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +34,8 @@
 
 <br>
 
-<%= link_to 'New faction', new_faction_path %>
+<%= link_to new_faction_path, class: "nav-link" do %>
+  <%= icon('far', "plus-square")%> Create a faction
+<% end %>
+
+</div>
