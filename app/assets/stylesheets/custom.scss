@@ -1,10 +1,11 @@
 $gray-light: #333;
 $state-danger-text: #555;
 
-body {
-  padding-top: 70px;
+@media (min-width: 412px) {
+  body {
+    padding-top: 70px;
+  }
 }
-
 @media (max-width: 576px) {
   /* by default there is a padding of 15px, but I don't want it on small screen */
   main {
@@ -23,7 +24,12 @@ body {
   border:1px solid #818c94;
   border:1px solid rgba(0,0,0,0.4);
   padding: 30px;
-  margin-top: 50px;
+}
+
+@media (min-width: 412px) {
+  .margin-box {
+    margin-top: 50px;
+  }
 }
 
 /* image from https://www.pexels.com/photo/soccer-ball-on-grass-field-during-daytime-46798/ */
