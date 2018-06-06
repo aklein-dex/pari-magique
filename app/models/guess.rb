@@ -10,6 +10,7 @@ class Guess < ApplicationRecord
             length: { maximum: 5 },
             format: { with: /\A[\d]?[\d]-[\d]?[\d]\z/i }
 
+  validate :before_game_starts
 
   # Return TRUE if the guess and the gameResult match
   def is_perfect_guess?(gameResult)
@@ -33,6 +34,15 @@ class Guess < ApplicationRecord
     return true if (gameArray[0] == gameArray[1] && guessArray[0] == guessArray[1])
 
     return false
+  end
+  
+  private
+  
+  # Make sure a guess can't be changed after the game has started
+  def before_game_starts
+    if Time.now > game.kickoff_at  
+      errors.add(:guess, "can't create or update guess after the game has started")
+    end
   end
   
   
