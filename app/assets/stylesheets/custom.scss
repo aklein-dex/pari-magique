@@ -1,10 +1,8 @@
 $gray-light: #333;
 $state-danger-text: #555;
 
-@media (min-width: 412px) {
   body {
     padding-top: 70px;
-  }
 }
 @media (max-width: 576px) {
   /* by default there is a padding of 15px, but I don't want it on small screen */

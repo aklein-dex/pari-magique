@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get '/rules', to: 'static_pages#rules'
 
-  resources :users
+
   resources :members
   resources :guesses
   resources :requests
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :tournaments, :factions
+    resources :tournaments, :factions, :users
 
     resources :stadia do
       collection { post :import }
