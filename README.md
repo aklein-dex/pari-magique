@@ -29,6 +29,18 @@ $ heroku logs
 
 The version of bundler of this project should match with the version of bundler used on Heroku.
 
+#### Access database on Heroku
+
+You need to install postgres on your machine
+```
+$ sudo apt-get update
+$ sudo apt-get install postgresql
+$ heroku pg:backups:capture
+$ heroku pg:psql
+=> select * from users;
+\q
+```
+
 #### Development environment
 
 ##### Redis
