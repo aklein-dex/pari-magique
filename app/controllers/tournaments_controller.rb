@@ -12,13 +12,13 @@ class TournamentsController < ApplicationController
 
   # Show the games for a specific group
   def group
-    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}").where(group: params[:group_id])
+    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}").where(group: params[:group_id]).order(:kickoff_at)
     @guess = Guess.new(:faction => @faction)
   end
 
   # Show the games for a specific round
   def round
-    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}").where(round: params[:round_id])
+    @games = @tournament.games.select("games.*, guesses.result as guess_result, guesses.id as guess_id").includes(:home, :away, :stadium).joins("LEFT JOIN guesses ON games.id = guesses.game_id and guesses.member_id = #{current_user.member_id_for_faction(@faction.id)} and guesses.faction_id = #{@faction.id}").where(round: params[:round_id]).order(:kickoff_at)
     @guess = Guess.new(:faction => @faction)
   end
 
