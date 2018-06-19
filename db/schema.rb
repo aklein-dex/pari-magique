@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227015403) do
+ActiveRecord::Schema.define(version: 20180619062919) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.string "title"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180227015403) do
   end
 
   create_table "factions", force: :cascade do |t|
-    t.string "name", limit: 5, null: false
+    t.string "name", limit: 20, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_factions_on_name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20180227015403) do
     t.datetime "updated_at", null: false
     t.index ["faction_id"], name: "index_guesses_on_faction_id"
     t.index ["game_id"], name: "index_guesses_on_game_id"
+    t.index ["member_id", "game_id", "faction_id"], name: "index_guesses_on_member_id_and_game_id_and_faction_id", unique: true
     t.index ["member_id"], name: "index_guesses_on_member_id"
   end
 

@@ -3,6 +3,9 @@ class Guess < ApplicationRecord
   belongs_to :game
   belongs_to :faction
 
+  # Make sure we can only have 1 bet for 1 user in 1 faction
+  validates_uniqueness_of :member_id, scope: [:game_id, :faction_id]
+  
   validates :member_id, presence: true
   validates :game_id, presence: true
   validates :faction_id, presence: true
