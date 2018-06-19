@@ -16,6 +16,7 @@ class FactionsController < ApplicationController
   # GET /factions/1.json
   def show
     @chat_room = ChatRoom.includes(:messages).find_by(faction_id: @faction.id)
+    @messages  = @chat_room.messages.reverse
     @message   = Message.new
     
     @tournaments = @faction.tournaments
