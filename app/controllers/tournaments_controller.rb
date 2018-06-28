@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament_and_faction, only: [:show, :group, :guesses, :ranking]
+  before_action :set_tournament_and_faction, only: [:show, :group, :round, :guesses, :ranking]
   load_and_authorize_resource
 
   # Main page to show an overview of the tournament

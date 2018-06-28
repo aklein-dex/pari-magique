@@ -34,16 +34,16 @@
             <%= link_to 'Group H', faction_tournament_group_path(@faction, @tournament, "H"), class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Round of 16', "#", class: "nav-link" %>
+            <%= link_to 'Round of 16', faction_tournament_round_path(@faction, @tournament, "round16"), class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Quarter-finals', "#", class: "nav-link" %>
+            <%= link_to 'Quarter-finals', faction_tournament_round_path(@faction, @tournament, "quarter"), class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Semi-finals', "#", class: "nav-link" %>
+            <%= link_to 'Semi-finals', faction_tournament_round_path(@faction, @tournament, "semi"), class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Final', "#", class: "nav-link" %>
+            <%= link_to 'Final', faction_tournament_round_path(@faction, @tournament, "final"), class: "nav-link" %>
           </li>
       </ul>
     </div>
