@@ -20,7 +20,7 @@ class Ability
         user.is_coach?(faction.id)
       end
 
-      can [:read, :group, :guesses, :ranking], Tournament
+      can [:read, :group, :round, :guesses, :ranking], Tournament
 
       can [:create], Guess
       can [:read, :update], Guess do |guess|
